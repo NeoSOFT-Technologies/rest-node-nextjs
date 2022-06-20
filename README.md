@@ -146,7 +146,7 @@ Below is a list of all the scripts this template has available:
 ## Project Structure
 
 In a TypeScript project, it's best to have separate _source_  and _distributable_ files.
-TypeScript (`.ts`) files live in your `src` folder and after compilation are output as JavaScript (`.js`) in the `dist` folder.
+TypeScript (`.ts`) files live in your `client` folder and after compilation are output as JavaScript (`.js`) in the `dist` folder.
 The `test` and `views` folders remain top level as expected.
 
 Please find below a detailed description of the app's folder structures:
@@ -160,24 +160,25 @@ Please find below a detailed description of the app's folder structures:
 | Name | Description |
 | ------------------------ | --------------------------------------------------------------------------------------------- |
 | **wiki/**                         | You can add project documentation and insructions file here |
-| **client**                  | Contains your source code that will be compiled to the build dir                               |
-| **client/components/**                | UI Components and reuseable components |
-| **client/pages/**                       | We can provide the frontend routes ,dynamic routes |
-| **client/pages/api/**             |we can provide the backend routes |
-| **client/resources/**               | Constant Variables such as images and strings  |
-| **client/store/**               |  Contains slice and hooks |
-| **client/store**/${page-name}/slice.ts               |  Contains slice configuration {state, action and reducers} |
-| **client/store**/index.ts               |  Entry point for store configuration|
-| **client/styles/**               | SASS styles |
-| **client/types/**               | Schema or Types |
-| **client/utils/**               | Reusable utlity like api http client |
-| **client**/index.ts        | Entry point to your frontend app                                                               |
-| **server**               |contains the source code of server  |
-| **server/configs/**      |connects the server with database  |
-| **server/controllers/**   |controllers belongs to that server  |  
-| **server/entities/**         | contains the schema,validations |
-| **server/services/**        | contains the logic and provide access to repo |
-| **server/utils/**          |connects repo with database |
+| **src**                  | Contains your source code that will be compiled to the build dir                               |
+| **src/client/**   |contains the source code of frontend|
+| **src/client/components/**                | UI Components and reuseable components |
+| **src/client/resources/**               | Constant Variables such as images and strings  |
+| **src/client/store/**               |  Contains slice and hooks |
+| **src/client/store**/${page-name}/slice.ts               |  Contains slice configuration {state, action and reducers} |
+| **src/client/store**/index.ts               |  Entry point for store configuration|
+| **src/client/styles/**               | SASS styles |
+| **src/client/types/**               | Schema or Types |
+| **src/client/utils/**               | Reusable utlity like api http client |
+| **src/client**/index.ts        | Entry point to your frontend app                                                               |
+| **src/pages/**                       | We can provide the frontend routes ,dynamic routes |
+| **src/pages/api/**             |we can provide the backend routes |
+| **src/server**               |contains the source code of backend  |
+| **src/server/configs/**      |connects the server with database  |
+| **src/server/controllers/**   |controllers belongs to that server  |  
+| **src/server/entities/**         | contains the schema,validations |
+| **src/server/services/**        | contains the logic and provide access to repo |
+| **src/server/utils/**          |connects repo with database |
 | package.json             | File that contains npm dependencies
 | tsconfig.json            | Config settings for compiling server code written in TypeScript                               |
 | next.config.js            |config settings for compiling option|

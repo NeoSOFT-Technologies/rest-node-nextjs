@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { Form, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getUserDetails } from "../../store/login/slice";
-import { ToastAlert } from "../../components/toast-alert/toast-alert";
+import { useAppDispatch, useAppSelector } from "../../client/store/hooks";
+import { getUserDetails } from "../../client/store/login/slice";
+import { ToastAlert } from "../../client/components/toast-alert/toast-alert";
 import styles from "./Login.module.scss";
 
 export default function Login() {

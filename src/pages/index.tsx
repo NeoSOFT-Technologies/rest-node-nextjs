@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector } from "../client/store/hooks";
 
 const Home: NextPage = () => {
   const userData = useAppSelector((root) => root.login);

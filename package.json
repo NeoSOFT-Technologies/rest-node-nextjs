@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier --write \"src/pages/**/*.{ts,tsx,json,css,scss}\" \"src/styles/**/*.{css,scss}\"",
+    "format": "prettier --write \"src/***/**/*.{ts,tsx,json,css,scss}\" \"src/client/styles/**/*.{css,scss}\"",
     "lint": "eslint . --ext js,jsx,mjs,ts,tsx ",
     "lint:fix": "eslint . --ext js,jsx,mjs,ts,tsx --fix",
     "lint:quiet": "eslint . --ext js,jsx,mjs,ts,tsx --quiet",
