@@ -15,11 +15,3 @@ export function createNewUser(data: RegisterData) {
   return apiFactory().post("api/auth/register", data);
 }
 
-// export function updateUserData(data: ITenantDetail) {
-//   const body = {
-//     action: {
-//       ...data,
-//     },
-//   };
-//   return apiFactory().patch(`api/auth/update`, body);
-// }
