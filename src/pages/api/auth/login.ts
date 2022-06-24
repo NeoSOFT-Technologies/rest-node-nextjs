@@ -1,13 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import handler from "../../../server/configs/next-connect";
+import authController from "../../../server/controllers/auth.controller";
 
-type Data = {
-  name: string
-}
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
-}
+export default handler.post(authController.login);

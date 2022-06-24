@@ -10,16 +10,17 @@ services:
     networks:
       - internal
 
-  database:
+  mongodb:
     image: mongo:latest
-    container_name: nextjs_mongodb
+    container_name: mongodb
+    hostname: mongodb
     restart: always
     networks:
       - internal
     ports:
       - '27017:27017'
     volumes:
-      - 'mongo:/data/db'
+      - 'mongodb:/data/db'
   
   # Add more containers below (nginx, postgres, etc.)
   # Define a network, which allows containers to communicate
@@ -28,5 +29,5 @@ services:
 networks:
   internal:
 volumes:
-  mongo:
+  mongodb:
 
