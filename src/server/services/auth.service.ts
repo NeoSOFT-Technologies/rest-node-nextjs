@@ -2,21 +2,21 @@ import { User } from "../entities/user";
 import getRepo from "../utils/get-repository";
 
 const login = async ({
-  username,
+  userName,
   password,
 }: {
-  username: string;
+  userName: string;
   password: string;
 }) => {
   const userRepo = await getRepo("User");
-  const user = (await userRepo.findOne({
+  const user = await userRepo.findOne({
     where: {
-      username,
+      userName,
     },
-  })) as User;
+  });
 
   if (!user) {
-    throw new Error(`no user with ${username} exists`);
+    throw new Error(`no user with ${userName} exists`);
   }
 
   if (user?.password !== password) {
@@ -27,35 +27,41 @@ const login = async ({
 };
 
 const regsiter = async ({
-  username,
+  userName,
   password,
   firstName,
   lastName,
 }: {
-  username: string;
+  userName: string;
   password: string;
   firstName: string;
   lastName: string;
 }) => {
   const userRepo = await getRepo("User");
-  const userRegsitered = (await userRepo.findOne({
-    where: {
-      username,
-    },
-  })) as User;
 
-  if (userRegsitered) {
-    throw new Error(`user with ${username} already exists`);
-  }
-
-  const user = (await userRepo.create({
-    username,
+  const newuser = userRepo.create({
+    userName,
     password,
     firstName,
     lastName,
-  })) as User;
-  userRepo.save(user);
+  });
+  const user = await userRepo.save(newuser);
   return user;
 };
 
-export default { login, regsiter };
+const updateUser = async ({
+  userName,
+  firstName,
+  lastName,
+}: {
+  userName: string;
+  firstName: string;
+  lastName: string;
+}) => {
+  const userRepo = await getRepo(User);
+  await userRepo.updateOne({ userName }, { $set: { firstName, lastName } });
+  const user = await userRepo.findOne({ where: { userName } });
+  return user;
+};
+
+export default { login, regsiter, updateUser };

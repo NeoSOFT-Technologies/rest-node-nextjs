@@ -9,8 +9,8 @@ async function connectDb() {
     console.log("connection is going to established");
     myDataSource = new DataSource({
       type: "mongodb",
-      // url: "mongodb://mongodb:27017",
-      url: "mongodb://localhost:27017",
+      url: "mongodb://mongodb:27017",
+       // url: "mongodb://localhost:27017",
       database: "nextjs-boilerplate",
       useNewUrlParser: true,
       logging: true,

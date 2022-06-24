@@ -12,9 +12,12 @@ export class User {
   @Column("string")
   lastName: string;
 
-  @Column("string")
-  username: string;
+  @Column({ type: "string", unique: true })
+  userName: string;
 
   @Column("string")
   password: string;
+
+  // @Column({ type: "string", nullable: false })
+  // imagePath: string;
 }

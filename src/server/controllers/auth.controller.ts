@@ -1,36 +1,37 @@
 import { NextApiRequest, NextApiResponse } from "next";
+
 import authService from "../services/auth.service";
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { username, password }: { username: string; password: string } =
+  const { userName, password }: { userName: string; password: string } =
     req.body;
 
-  if (!username || !password) {
-    throw new Error("please provide username and password both");
+  if (!userName || !password) {
+    throw new Error("please provide userName and password both");
   }
 
-  const user = await authService.login({ username, password });
+  const user = await authService.login({ userName, password });
   res.status(200).json({ user });
 };
 
 const register = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
-    username,
+    userName,
     password,
     firstName,
     lastName,
   }: {
-    username: string;
+    userName: string;
     password: string;
     firstName: string;
     lastName: string;
   } = req.body;
 
-  if (!username || !password || !firstName || !lastName) {
+  if (!userName || !password || !firstName || !lastName) {
     throw new Error("please provide all details");
   }
 
   const user = await authService.regsiter({
-    username,
+    userName,
     password,
     firstName,
     lastName,
@@ -38,4 +39,22 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(201).json({ user });
 };
 
-export default { login, register };
+const updateUser = async (req: NextApiRequest, res: NextApiResponse) => {
+  const {
+    userName,
+    firstName,
+    lastName,
+  }: {
+    userName: string;
+    firstName: string;
+    lastName: string;
+  } = req.body;
+  if (!userName || !firstName || !lastName) {
+    throw new Error("data ia not updated");
+  }
+
+  const user = await authService.updateUser({ userName, firstName, lastName });
+  res.status(200).json({ user });
+};
+
+export default { login, register, updateUser };

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { validateUserLoginCredentials } from "../../services/login";
-import { LoginData, LoginPageState } from "../../types/index";
-import error from "../../utils/error";
+import { LoginPageState } from "../../types/index";
+import errorHandler from "../../utils/error-handler";
+
 interface ILoginDataConditions {
-  username: string;
+  userName: string;
   password: string;
 }
 const initialState: LoginPageState = {
@@ -19,8 +20,9 @@ export const getUserDetails = createAsyncThunk(
       const response = await validateUserLoginCredentials(credentials);
       console.log(response);
       return response;
-    } catch (_error) {
-      throw new Error(error(_error));
+    } catch (_error: any) {
+      const errorMessage = errorHandler(_error);
+      throw new Error(errorMessage);
     }
   }
 );
@@ -44,8 +46,8 @@ const slice = createSlice({
     });
     builder.addCase(getUserDetails.fulfilled, (state, action) => {
       state.loading = false;
-      localStorage.setItem("username", JSON.stringify(action.payload.username));
-      state.data = action.payload as LoginData;
+      localStorage.setItem("userName", JSON.stringify(action.payload.userName));
+      state.data = action.payload;
     });
     builder.addCase(getUserDetails.rejected, (state, action) => {
       state.loading = false;

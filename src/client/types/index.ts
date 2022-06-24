@@ -1,11 +1,32 @@
 export interface LoginData {
-    username: string;
-    password: string;
-    title: string;
-    description: string;
-  }
-  export interface LoginPageState {
-    data?: LoginData;
-    loading: boolean;
-    error?: string;
-  }
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+}
+export interface LoginPageState {
+  data?: LoginData;
+  loading: boolean;
+  error?: string;
+}
+export interface RegisterData {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+}
+export interface RegisterDatas {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+  cnfpassword?: string;
+}
+
+export interface IErrorUserInput {
+  firstName: string;
+  lastName: string;
+  userName?: string;
+  password?: string;
+  cnfpassword?: string;
+}
