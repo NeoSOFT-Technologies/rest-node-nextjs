@@ -90,14 +90,16 @@ export default function Registration() {
   console.log(handleValidate());
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    const newuser = { ...user };
+    delete newuser.cnfpassword;
+    console.log(newuser);
+    await dispatch(addNewUser({ ...newuser }));
+
     const result = RootState.getState().addNewUserState;
+    console.log(result)
     if (handleValidate()) {
       if (result.userAdded) {
-        const newuser = { ...user };
-        delete newuser.cnfpassword;
-        console.log(newuser);
-        await dispatch(addNewUser({ ...newuser }));
-
+      
         ToastAlert("LoggedIn successfully", "success");
         router.push("/");
       } else {
