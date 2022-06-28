@@ -64,4 +64,15 @@ const updateUser = async ({
   return user;
 };
 
-export default { login, regsiter, updateUser };
+const deleteUser = async ({
+  userName,
+  }: {
+  userName: string;
+  
+}) => {
+  const userRepo = await getRepo(User);
+  
+  return  userRepo.deleteOne({userName});
+};
+
+export default { login, regsiter, updateUser,deleteUser };

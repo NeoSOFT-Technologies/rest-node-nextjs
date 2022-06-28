@@ -5,7 +5,7 @@ import { Row, Col, Container } from "react-bootstrap";
 export default function Dashboard({ posts }: { posts: any }) {
   return (
     <>
-      <Header />
+     
       <Container className="p-3">
         <Row>
           {posts.map((post: any) => {

@@ -10,10 +10,11 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const user = await authService.login({ userName, password });
-  res.status(200).json({ user });
+  res.status(200).json({ ...user });
 };
 
 const register = async (req: NextApiRequest, res: NextApiResponse) => {
+  
   const {
     userName,
     password,
@@ -36,7 +37,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     firstName,
     lastName,
   });
-  res.status(201).json({ user });
+  res.status(201).json({ ...user });
 };
 
 const updateUser = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -54,7 +55,17 @@ const updateUser = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const user = await authService.updateUser({ userName, firstName, lastName });
-  res.status(200).json({ user });
+  res.status(200).json({ ...user });
 };
 
-export default { login, register, updateUser };
+const deleteUser = async (req: NextApiRequest, res: NextApiResponse) => {
+const userName=req.query.userName as string
+  if (!userName ) {
+    throw new Error("data ia not found");
+  }
+
+  const user = await authService.deleteUser({ userName });
+  res.status(200).json({ ...user });
+};
+
+export default { login, register, updateUser ,deleteUser};

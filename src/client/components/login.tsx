@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import { Form } from "react-bootstrap";
-import { ReactElement, useState } from "react";
-import { useAppDispatch } from "../client/store/hooks";
-import { getUserDetails } from "../client/store/login/slice";
-import { ToastAlert } from "../client/components/toast-alert/toast-alert";
-import styles from "../client/styles/Login.module.scss";
-import RootState from "../client/store";
-import type { NextPageWithLayout } from './_app'
+import { useState } from "react";
+import { useAppDispatch } from "../store/hooks";
+import { getUserDetails } from "../store/login/slice";
+import { ToastAlert } from "./toast-alert/toast-alert";
+import styles from "../styles/Login.module.scss";
+import RootState from "../store";
+//import KeepAlive, { useActivate } from 'react-activation'
 export default function Login() {
   const [formData, setFormData] = useState({ userName: "", password: "" });
-
+  const result = RootState.getState().login;
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -28,11 +28,15 @@ export default function Login() {
     }
   };
 
+
+ 
+  //console.log(result.data?.user.userName,"hii")
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     await dispatch(getUserDetails({ ...formData }));
-    const result = RootState.getState().login;
+   
     if (result.data) {
+      
       ToastAlert("LoggedIn successfully", "success");
       router.push("/dashboard");
     } else {
@@ -42,6 +46,7 @@ export default function Login() {
 
   return (
     <>
+  
       <div className={styles.backgroundblue}>
         <Form className={styles.backgroudoffwhite}>
           <h4 className="text-center text-white">Login Page</h4>
@@ -93,12 +98,7 @@ export default function Login() {
           </div>
         </Form>
       </div>
+    
     </>
   );
-}
-Login.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <>{page}</>
-    
-  )
 }

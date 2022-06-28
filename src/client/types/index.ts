@@ -1,8 +1,14 @@
+
+
+
 export interface LoginData {
+ 
+ 
   firstName: string;
   lastName: string;
   userName: string;
   password: string;
+  _id:string
 }
 export interface LoginPageState {
   data?: LoginData;
@@ -29,4 +35,14 @@ export interface IErrorUserInput {
   userName?: string;
   password?: string;
   cnfpassword?: string;
+}
+
+export interface IUserDetail{
+  firstName: string;
+  lastName: string;
+  userName: string;
+}
+export interface IErrorUserDetail{
+  firstName: string;
+  lastName: string;
 }
