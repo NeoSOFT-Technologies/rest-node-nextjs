@@ -6,7 +6,7 @@ import { getUserDetails } from "../client/store/login/slice";
 import { ToastAlert } from "../client/components/toast-alert/toast-alert";
 import styles from "../client/styles/Login.module.scss";
 import RootState from "../client/store";
-import type { NextPageWithLayout } from './_app'
+
 export default function Login() {
   const [formData, setFormData] = useState({ userName: "", password: "" });
 
@@ -34,7 +34,7 @@ export default function Login() {
     const result = RootState.getState().login;
     if (result.data) {
       ToastAlert("LoggedIn successfully", "success");
-      router.push("/settings");
+      router.push("/dashboard");
     } else {
       ToastAlert("Incorrect credentials", "warning");
     }

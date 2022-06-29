@@ -12,6 +12,7 @@ import styles from "../client/styles/Settings.module.scss";
 
 const UserProfile = () => {
   const result = RootState.getState().login;
+  console.log(result)
   const [edit, setEdit] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -125,7 +126,7 @@ const UserProfile = () => {
                     data-testid="UserName-input"
                     type="text"
                     className={styles.inputstyle}
-                    placeholder="Enter Name"
+                    placeholder="Enter FirstName"
                     name="firstName"
                     onChange={handleInputChange}
                     value={User.firstName}
@@ -144,7 +145,7 @@ const UserProfile = () => {
                   <Form.Control
                     data-testid="UserName-input"
                     type="text"
-                    placeholder="Enter Name"
+                    placeholder="Enter LastName"
                     name="lastName"
                     className={styles.inputstyle}
                     onChange={handleInputChange}
@@ -164,7 +165,7 @@ const UserProfile = () => {
                   <Form.Control
                     type="text"
                     
-                    placeholder="UserName"
+                    placeholder="Enter UserName"
                     value={User.userName}
                     className={styles.inputstyle}
                     name="userName"

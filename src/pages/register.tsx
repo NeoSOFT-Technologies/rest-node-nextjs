@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { ReactElement, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Row, Col, InputGroup } from "react-bootstrap";
 import PasswordButtons from "../client/components/password-field/PasswordButtons";
@@ -267,4 +267,10 @@ export default function Registration() {
       {/* )} */}
     </>
   );
+}
+Registration.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <>{page}</>
+    
+  )
 }
