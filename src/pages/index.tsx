@@ -34,7 +34,7 @@ export default function Login() {
     const result = RootState.getState().login;
     if (result.data) {
       ToastAlert("LoggedIn successfully", "success");
-      router.push("/dashboard");
+      router.push("/settings");
     } else {
       ToastAlert("Incorrect credentials", "warning");
     }

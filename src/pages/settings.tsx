@@ -8,7 +8,7 @@ import {  useAppDispatch } from "../client/store/hooks";
 import {IErrorUserDetail,IUserDetail} from "../client/types";
 import { useRouter } from "next/router";
 import {deleteUser} from "../client/store/delete/slice"
-
+import styles from "../client/styles/Settings.module.scss";
 
 const UserProfile = () => {
   const result = RootState.getState().login;
@@ -76,10 +76,12 @@ const UserProfile = () => {
       setDeleteshow(false)
     };
   return (
-    <>
+    <><div className={styles.backgroundblue}>
+      <div>
+        <div className={styles.dropdownitem}>
       <Dropdown className="d-inline-block">
         <Dropdown.Toggle
-          className="btn-success "
+          className="btn-light "
           id="dropdown-basic"
           data-testid="dropdown-action"
         >
@@ -94,7 +96,7 @@ const UserProfile = () => {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-
+      </div>
     <Modal show={deleteshow} onHide={() => setDeleteshow(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Delete User</Modal.Title>
@@ -110,17 +112,19 @@ const UserProfile = () => {
           </Button>
         </Modal.Footer>
       </Modal>  
-      <div className=" bg-white">
-        <Container className="m-1">
-          <h2 className="text-center pt-3 p-3">User Details </h2>
-          <Form className="p-4">
+    
+     
+        
+          <Form   className={styles.backgroudoffwhite}>
+          <h2 className="text-center pt-3 p-3 text-white">User Details </h2>
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label>First Name :</Form.Label>
+                
                   <Form.Control
                     data-testid="UserName-input"
                     type="text"
+                    className={styles.inputstyle}
                     placeholder="Enter Name"
                     name="firstName"
                     onChange={handleInputChange}
@@ -136,12 +140,13 @@ const UserProfile = () => {
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Last Name :</Form.Label>
+                 
                   <Form.Control
                     data-testid="UserName-input"
                     type="text"
                     placeholder="Enter Name"
                     name="lastName"
+                    className={styles.inputstyle}
                     onChange={handleInputChange}
                     value={User.lastName}
                     isInvalid={!!error.lastName}
@@ -155,12 +160,13 @@ const UserProfile = () => {
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label>userName :</Form.Label>
+                
                   <Form.Control
                     type="text"
                     
                     placeholder="UserName"
                     value={User.userName}
+                    className={styles.inputstyle}
                     name="userName"
                     onChange={handleInputChange}
                     disabled
@@ -168,39 +174,39 @@ const UserProfile = () => {
                 </Form.Group>
               </Col>
 
-              <div>
+              <div className="text-dark">
                 {edit ? (
-                  <Button
+                  <button
                     data-testid="update-button"
                     onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
                       handleUpdateUser(event)
                     }
-                    className="mt-3 info "
+                    className={styles.btn}
                   >
                     Update
-                  </Button>
+                  </button>
                 ) : (
-                  <Button
+                  <button
                     data-testid="edit-button"
                     onClick={() => setEdit(true)}
-                    className="mt-3 info "
+                    className={styles.btn}
                   >
                     Edit
-                  </Button>
+                  </button>
                 )}
 
-                <Button
+                <button
                   data-testid="cancel-button"
-                  className="btn btn-light mt-3"
+                  className={`${styles.btn} ms-2`}
                   type="reset"
                   onClick={() => router.push("/dashboard")}
                 >
                   Cancel
-                </Button>
+                </button>
               </div>
             </Row>
           </Form>
-        </Container>
+          </div>
       </div>
     </>
   );

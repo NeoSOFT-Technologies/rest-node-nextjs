@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, Container, Navbar } from "react-bootstrap";
+import { Nav, Container, Navbar, Button } from "react-bootstrap";
 export default function Header() {
   return (
     <div>
@@ -9,9 +9,15 @@ export default function Header() {
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+           
+
           </Nav>
         </Container>
+        <Button
+        className="btn-light btn-sm me-4"
+        >
+              Logout
+        </Button>
       </Navbar>
     </div>
   );
