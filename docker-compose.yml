@@ -4,7 +4,6 @@ services:
   rest-node-nextjs:
     container_name: rest-node-nextjs
     build: .
-    restart: always
     ports:
       - 3000:3000
     networks:
@@ -14,7 +13,6 @@ services:
     image: mongo:latest
     container_name: mongodb
     hostname: mongodb
-    restart: always
     networks:
       - internal
     ports:
