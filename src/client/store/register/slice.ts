@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createNewUser } from "../../services/login";
-import { RegisterData } from "../../types";
+import { createNewUserService } from "../../services/login";
+import { IRegisterData } from "../../types";
 import errorHandler from "../../utils/error-handler";
 
 interface IAddUserState {
@@ -16,9 +16,9 @@ const initialState: IAddUserState = {
 
 export const addNewUser = createAsyncThunk(
   "register/user",
-  async (conditions: RegisterData) => {
+  async (conditions: IRegisterData) => {
     try {
-      const response = await createNewUser(conditions);
+      const response = await createNewUserService(conditions);
       console.log(response.data);
       return response.data;
     } catch (_error: any) {

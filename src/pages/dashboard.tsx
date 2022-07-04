@@ -1,16 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import Header from "../client/components/header/header";
+
 import { Row, Col, Container } from "react-bootstrap";
 export default function Dashboard({ posts }: { posts: any }) {
   return (
     <>
-      <Header />
       <Container className="p-3">
         <Row>
           {posts.map((post: any) => {
             return (
-              <Col md="4" sm="12" key={post.author}>
+              <Col md="4" sm="12" key={post.id}>
                 <div>
                   <h6>{post.author}</h6>
                   <Image

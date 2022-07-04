@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { ReactElement, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Row, Col, InputGroup } from "react-bootstrap";
 import PasswordButtons from "../client/components/password-field/PasswordButtons";
@@ -11,15 +11,17 @@ import {
 import RootState from "../client/store";
 import { addNewUser } from "../client/store/register/slice";
 import { useAppDispatch } from "../client/store/hooks";
-import { IErrorUserInput, RegisterDatas } from "../client/types/index";
+import { IErrorUserInput, IRegisterDatas } from "../client/types/index";
 import styles from "../client/styles/Register.module.scss";
-
+import { useTranslation } from "react-i18next";
+import LanguageChange from "../client/components/i18n/LanguageChange";
 export default function Registration() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [showPassword, setShowpassword] = useState(false);
 
-  const [user, setUser] = useState<RegisterDatas>({
+  const [user, setUser] = useState<IRegisterDatas>({
     firstName: "",
     lastName: "",
     userName: "",
@@ -72,9 +74,6 @@ export default function Registration() {
               : "",
         });
         break;
-
-      default:
-        break;
     }
     setUser({ ...user, [name]: value });
   };
@@ -96,10 +95,9 @@ export default function Registration() {
     await dispatch(addNewUser({ ...newuser }));
 
     const result = RootState.getState().addNewUserState;
-    console.log(result)
+    //console.log(result)
     if (handleValidate()) {
       if (result.userAdded) {
-      
         ToastAlert("LoggedIn successfully", "success");
         router.push("/");
       } else {
@@ -113,158 +111,167 @@ export default function Registration() {
   return (
     <>
       <div className={styles.backgroundblue}>
-        <Form
-          onSubmit={handleSubmit}
-          data-testid="form-input"
-          className={styles.backgroudoffwhite}
-        >
-          <h1 className="text-center text-white pb-2 pt-3">
-            Registration Page
-          </h1>
-          <Row>
-            <Col md="6">
-              <Form.Group className="mb-3">
-                <Form.Control
-                  className={styles.inputstyle}
-                  type="text"
-                  id="FirstName"
-                  placeholder="Enter FirstName"
-                  name="firstName"
-                  data-testid="FirstName-input"
-                  value={user.firstName}
-                  isInvalid={!!error.firstName}
-                  isValid={!error.firstName && !!user.firstName}
-                  onChange={handleInputChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  {error.firstName}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col md="6">
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  className={styles.inputstyle}
-                  id="LastName"
-                  placeholder="Enter LastName"
-                  name="lastName"
-                  data-testid="LastName-input"
-                  value={user.lastName}
-                  isInvalid={!!error.lastName}
-                  isValid={!error.lastName && !!user.lastName}
-                  onChange={handleInputChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  {error.lastName}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col md="6">
-              <Form.Group className="mb-3">
-                <Form.Control
-                  data-testid="userName-input"
-                  type="text"
-                  className={styles.inputstyle}
-                  placeholder="Enter Username"
-                  name="userName"
-                  value={user.userName}
-                  isValid={!error.userName && !!user.userName}
-                  isInvalid={!!error.userName}
-                  onChange={handleInputChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  {error.userName}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col md="6">
-              <Form.Group className="mb-3">
-                <InputGroup>
+        <div className={styles.center}>
+          <Form
+            onSubmit={handleSubmit}
+            data-testid="form-input"
+            className={styles.backgroudoffwhite}
+          >
+            <h1 className="text-center text-white pb-2 pt-3">
+              {t("sign-up-clause")}
+            </h1>
+            <Row>
+              <Col md="6">
+                <Form.Group className="mb-3">
                   <Form.Control
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter Password"
-                    data-testid="password-input"
-                    name="password"
                     className={styles.inputstyle}
+                    type="text"
+                    id="FirstName"
+                    placeholder={t("firstname-placeholder")}
+                    name="firstName"
+                    data-testid="firstName-input"
+                    value={user.firstName}
+                    isInvalid={!!error.firstName}
+                    isValid={!error.firstName && !!user.firstName}
                     onChange={handleInputChange}
-                    value={user.password}
-                    isValid={!error.password && !!user.password}
-                    isInvalid={!!error.password}
                     required
-                  />{" "}
-                  <InputGroup.Text>
-                    <PasswordButtons
-                      viewPassword={showPassword}
-                      setViewPassword={setShowpassword}
-                    />
-                  </InputGroup.Text>
-                </InputGroup>
-                <Form.Control.Feedback type="invalid" className="d-block">
-                  {error.password}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col md="6">
-              <Form.Group className="mb-3">
-                <InputGroup>
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {t("name-error")}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+              <Col md="6">
+                <Form.Group className="mb-3">
                   <Form.Control
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter ConfirmPassword"
-                    data-testid="Cnfpassword-input"
-                    name="cnfpassword"
+                    type="text"
                     className={styles.inputstyle}
+                    id="LastName"
+                    placeholder={t("lastname-placeholder")}
+                    name="lastName"
+                    data-testid="lastName-input"
+                    value={user.lastName}
+                    isInvalid={!!error.lastName}
+                    isValid={!error.lastName && !!user.lastName}
                     onChange={handleInputChange}
-                    value={user.cnfpassword}
-                    isValid={!error.cnfpassword && !!user.cnfpassword}
-                    isInvalid={!!error.cnfpassword}
                     required
-                  />{" "}
-                  <InputGroup.Text>
-                    <PasswordButtons
-                      viewPassword={showPassword}
-                      setViewPassword={setShowpassword}
-                    />
-                  </InputGroup.Text>
-                </InputGroup>
-                <Form.Control.Feedback type="invalid" className="d-block">
-                  {error.cnfpassword}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {t("name-error")}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+              <Col md="6">
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    data-testid="userName-input"
+                    type="text"
+                    className={styles.inputstyle}
+                    placeholder={t("username-placeholder")}
+                    name="userName"
+                    value={user.userName}
+                    isValid={!error.userName && !!user.userName}
+                    isInvalid={!!error.userName}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {t("username-error")}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+              <Col md="6">
+                <Form.Group className="mb-3">
+                  <InputGroup>
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("password-placeholder")}
+                      data-testid="password-input"
+                      name="password"
+                      className={styles.inputstyle}
+                      onChange={handleInputChange}
+                      value={user.password}
+                      isValid={!error.password && !!user.password}
+                      isInvalid={!!error.password}
+                      required
+                    />{" "}
+                    <InputGroup.Text>
+                      <PasswordButtons
+                        viewPassword={showPassword}
+                        setViewPassword={setShowpassword}
+                      />
+                    </InputGroup.Text>
+                  </InputGroup>
+                  <Form.Control.Feedback type="invalid" className="d-block">
+                    {t("password-error")}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+              <Col md="6">
+                <Form.Group className="mb-3">
+                  <InputGroup>
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("cnfpassword-placeholder")}
+                      data-testid="Cnfpassword-input"
+                      name="cnfpassword"
+                      className={styles.inputstyle}
+                      onChange={handleInputChange}
+                      value={user.cnfpassword}
+                      isValid={!error.cnfpassword && !!user.cnfpassword}
+                      isInvalid={!!error.cnfpassword}
+                      required
+                    />{" "}
+                    <InputGroup.Text>
+                      <PasswordButtons
+                        viewPassword={showPassword}
+                        setViewPassword={setShowpassword}
+                      />
+                    </InputGroup.Text>
+                  </InputGroup>
+                  <Form.Control.Feedback type="invalid" className="d-block">
+                    {t("cnfpassword-error")}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
 
-            <Col md="12">
-              <div>
-                <button
-                  className={styles.btn}
-                  type="submit"
-                  data-testid="submit-input"
-                >
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span> Register
-                </button>
-                <button
-                  className={`${styles.btn} ms-2`}
-                  onClick={() => {
-                    router.push("/");
-                  }}
-                >
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span> Login
-                </button>
-              </div>
-            </Col>
-          </Row>
-        </Form>
+              <Col md="12">
+                <div>
+                  <button
+                    className={styles.btn}
+                    type="submit"
+                    data-testid="submit-input"
+                  >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span> {t("sign-up-button")}
+                  </button>
+
+                  <button
+                    className={`${styles.btn} ms-2`}
+                    data-testid="signin-button"
+                    type="button"
+                    onClick={() => {
+                      router.push("/");
+                    }}
+                  >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span> {t("sign-in-button")}
+                  </button>
+                </div>
+              </Col>
+            </Row>
+          </Form>
+        </div>
+        <LanguageChange />
       </div>
       {/* )} */}
     </>
   );
 }
+Registration.getLayout = function getLayout(page: ReactElement) {
+  return <>{page}</>;
+};

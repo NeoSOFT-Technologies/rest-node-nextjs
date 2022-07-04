@@ -1,7 +1,7 @@
 import { User } from "../entities/user";
 import getRepo from "../utils/get-repository";
-
-const login = async ({
+const authService = {
+ login :async ({
   userName,
   password,
 }: {
@@ -24,9 +24,9 @@ const login = async ({
   }
 
   return user;
-};
+},
 
-const regsiter = async ({
+regsiter : async ({
   userName,
   password,
   firstName,
@@ -47,9 +47,9 @@ const regsiter = async ({
   });
   const user = await userRepo.save(newuser);
   return user;
-};
+},
 
-const updateUser = async ({
+ updateUser :async ({
   userName,
   firstName,
   lastName,
@@ -62,6 +62,17 @@ const updateUser = async ({
   await userRepo.updateOne({ userName }, { $set: { firstName, lastName } });
   const user = await userRepo.findOne({ where: { userName } });
   return user;
-};
+},
 
-export default { login, regsiter, updateUser };
+ deleteUser : async ({
+  userName,
+  }: {
+  userName: string;
+  
+}) => {
+  const userRepo = await getRepo(User);
+  
+  return  userRepo.deleteOne({userName});
+},
+}
+export default authService

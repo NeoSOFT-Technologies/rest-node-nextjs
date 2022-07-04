@@ -1,14 +1,18 @@
 import { useRouter } from "next/router";
-import { Form } from "react-bootstrap";
-import { useState } from "react";
+import { Form, InputGroup } from "react-bootstrap";
+import PasswordButtons from "../client/components/password-field/PasswordButtons";
+import { ReactElement, useState } from "react";
 import { useAppDispatch } from "../client/store/hooks";
 import { getUserDetails } from "../client/store/login/slice";
 import { ToastAlert } from "../client/components/toast-alert/toast-alert";
 import styles from "../client/styles/Login.module.scss";
 import RootState from "../client/store";
+import { useTranslation } from "react-i18next";
+import LanguageChange from "../client/components/i18n/LanguageChange";
 export default function Login() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({ userName: "", password: "" });
-
+  const [showPassword, setShowpassword] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -21,8 +25,6 @@ export default function Login() {
         break;
       case "password":
         setFormData({ ...formData, password: value });
-        break;
-      default:
         break;
     }
   };
@@ -42,56 +44,76 @@ export default function Login() {
   return (
     <>
       <div className={styles.backgroundblue}>
-        <Form className={styles.backgroudoffwhite}>
-          <h4 className="text-center text-white">Login Page</h4>
-          <Form.Group className="mb-3">
-            <Form.Control
-              className={styles.inputstyle}
-              type="text"
-              placeholder="User Name"
-              name="userName"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control
-              className={styles.inputstyle}
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <div className="m-3  ">
-            <button
-              data-testid="signin-button"
-              className={styles.btn}
-              onClick={(e) => {
-                handleSubmit(e);
-              }}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span> Login
-            </button>
+        <div className={styles.center}>
+          <Form className={styles.backgroudoffwhite}>
+            <h4 className="text-center text-white">{t("sign-in-clause")}</h4>
+            <Form.Group className="mb-3">
+              <Form.Control
+                className={styles.inputstyle}
+                type="text"
+                placeholder={t("username-placeholder")}
+                name="userName"
+                data-testid="userName-input"
+                onChange={handleInputChange}
+                required
+              />
+            </Form.Group>
 
-            <button
-              data-testid="signin-button"
-              className={`${styles.btn} ms-2`}
-              onClick={() => {
-                router.push("/register");
-              }}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span> Register
-            </button>
-          </div>
-        </Form>
+            <Form.Group className="mb-3">
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder={t("password-placeholder")}
+                  data-testid="password-input"
+                  name="password"
+                  className={styles.inputstyle}
+                  onChange={handleInputChange}
+                  required
+                />{" "}
+                <InputGroup.Text>
+                  <PasswordButtons
+                    viewPassword={showPassword}
+                    setViewPassword={setShowpassword}
+                  />
+                </InputGroup.Text>
+              </InputGroup>
+            </Form.Group>
+            <div className="m-3  ">
+              <button
+                data-testid="signin-button"
+                type="submit"
+                className={styles.btn}
+                onClick={(e) => {
+                  handleSubmit(e);
+                }}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> {t("sign-in-button")}
+              </button>
+
+              <button
+                data-testid="signup-button"
+                type="button"
+                className={`${styles.btn} ms-2`}
+                onClick={() => {
+                  router.push("/register");
+                }}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> {t("sign-up-button")}
+              </button>
+            </div>
+          </Form>
+        </div>
+        <LanguageChange />
       </div>
     </>
   );
 }
+Login.getLayout = function getLayout(page: ReactElement) {
+  return <>{page}</>;
+};

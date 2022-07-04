@@ -1,21 +1,22 @@
-export interface LoginData {
+export interface ILoginData {
   firstName: string;
   lastName: string;
   userName: string;
   password: string;
+  _id:string
 }
 export interface LoginPageState {
-  data?: LoginData;
+  data?: ILoginData;
   loading: boolean;
   error?: string;
 }
-export interface RegisterData {
+export interface IRegisterData {
   firstName: string;
   lastName: string;
   userName: string;
   password: string;
 }
-export interface RegisterDatas {
+export interface IRegisterDatas {
   firstName: string;
   lastName: string;
   userName: string;
@@ -29,4 +30,14 @@ export interface IErrorUserInput {
   userName?: string;
   password?: string;
   cnfpassword?: string;
+}
+
+export interface IUserDetail{
+  firstName: string;
+  lastName: string;
+  userName: string;
+}
+export interface IErrorUserDetail{
+  firstName: string;
+  lastName: string;
 }

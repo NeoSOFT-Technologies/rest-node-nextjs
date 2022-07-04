@@ -1,4 +1,4 @@
 import handler from "../../../server/configs/next-connect";
-import authController from "../../../server/controllers/auth.controller";
+import userCtrl from "../../../server/controllers/auth.controller";
 
-export default handler.patch(authController.updateUser);
+export default handler.patch(userCtrl.updateUser);
