@@ -9,6 +9,7 @@ import Header from "../client/components/header/header"
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 
+import "../client/i18n/config";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -23,10 +24,12 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <Provider store={store}>
     <ErrorBoundary>
         <Authguard>
-      <Component {...pageProps} />
+       <Component {...pageProps} />
+     
        </Authguard>
       </ErrorBoundary>
-    </Provider>)
+    </Provider>
+    )
   }
   return (
     <>

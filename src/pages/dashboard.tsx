@@ -11,7 +11,7 @@ export default function Dashboard({ posts }: { posts: any }) {
         <Row>
           {posts.map((post: any) => {
             return (
-              <Col md="4" sm="12" key={post.author}>
+              <Col md="4" sm="12" key={post.id}>
                 <div>
                   <h6>{post.author}</h6>
                   <Image

@@ -11,15 +11,17 @@ import {
 import RootState from "../client/store";
 import { addNewUser } from "../client/store/register/slice";
 import { useAppDispatch } from "../client/store/hooks";
-import { IErrorUserInput, RegisterDatas } from "../client/types/index";
+import { IErrorUserInput, IRegisterDatas } from "../client/types/index";
 import styles from "../client/styles/Register.module.scss";
-
+import { useTranslation } from "react-i18next";
+import LanguageChange from "../client/components/i18n/LanguageChange";
 export default function Registration() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [showPassword, setShowpassword] = useState(false);
 
-  const [user, setUser] = useState<RegisterDatas>({
+  const [user, setUser] = useState<IRegisterDatas>({
     firstName: "",
     lastName: "",
     userName: "",
@@ -73,8 +75,7 @@ export default function Registration() {
         });
         break;
 
-      default:
-        break;
+   
     }
     setUser({ ...user, [name]: value });
   };
@@ -96,7 +97,7 @@ export default function Registration() {
     await dispatch(addNewUser({ ...newuser }));
 
     const result = RootState.getState().addNewUserState;
-    console.log(result)
+    //console.log(result)
     if (handleValidate()) {
       if (result.userAdded) {
       
@@ -112,14 +113,15 @@ export default function Registration() {
 
   return (
     <>
-      <div className={styles.backgroundblue}>
+   <div  className={styles.backgroundblue}>
+      <div  className={styles.center}>
         <Form
           onSubmit={handleSubmit}
           data-testid="form-input"
           className={styles.backgroudoffwhite}
         >
           <h1 className="text-center text-white pb-2 pt-3">
-            Registration Page
+          {t("sign-up-clause")}
           </h1>
           <Row>
             <Col md="6">
@@ -128,9 +130,9 @@ export default function Registration() {
                   className={styles.inputstyle}
                   type="text"
                   id="FirstName"
-                  placeholder="Enter FirstName"
+                  placeholder= {t("firstname-placeholder")}
                   name="firstName"
-                  data-testid="FirstName-input"
+                  data-testid="firstName-input"
                   value={user.firstName}
                   isInvalid={!!error.firstName}
                   isValid={!error.firstName && !!user.firstName}
@@ -138,7 +140,7 @@ export default function Registration() {
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  {error.firstName}
+                {t("name-error")}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -148,9 +150,9 @@ export default function Registration() {
                   type="text"
                   className={styles.inputstyle}
                   id="LastName"
-                  placeholder="Enter LastName"
+                  placeholder= {t("lastname-placeholder")}
                   name="lastName"
-                  data-testid="LastName-input"
+                  data-testid="lastName-input"
                   value={user.lastName}
                   isInvalid={!!error.lastName}
                   isValid={!error.lastName && !!user.lastName}
@@ -158,7 +160,7 @@ export default function Registration() {
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  {error.lastName}
+                {t("name-error")}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -168,7 +170,7 @@ export default function Registration() {
                   data-testid="userName-input"
                   type="text"
                   className={styles.inputstyle}
-                  placeholder="Enter Username"
+                  placeholder= {t("username-placeholder")}
                   name="userName"
                   value={user.userName}
                   isValid={!error.userName && !!user.userName}
@@ -177,7 +179,7 @@ export default function Registration() {
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  {error.userName}
+                {t("username-error")}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -186,7 +188,7 @@ export default function Registration() {
                 <InputGroup>
                   <Form.Control
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter Password"
+                    placeholder= {t("password-placeholder")}
                     data-testid="password-input"
                     name="password"
                     className={styles.inputstyle}
@@ -204,7 +206,7 @@ export default function Registration() {
                   </InputGroup.Text>
                 </InputGroup>
                 <Form.Control.Feedback type="invalid" className="d-block">
-                  {error.password}
+                {t("password-error")}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -213,7 +215,7 @@ export default function Registration() {
                 <InputGroup>
                   <Form.Control
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter ConfirmPassword"
+                    placeholder= {t("cnfpassword-placeholder")}
                     data-testid="Cnfpassword-input"
                     name="cnfpassword"
                     className={styles.inputstyle}
@@ -231,7 +233,7 @@ export default function Registration() {
                   </InputGroup.Text>
                 </InputGroup>
                 <Form.Control.Feedback type="invalid" className="d-block">
-                  {error.cnfpassword}
+                {t("cnfpassword-error")}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -246,10 +248,13 @@ export default function Registration() {
                   <span></span>
                   <span></span>
                   <span></span>
-                  <span></span> Register
+                  <span></span>  {t("sign-up-button")}
                 </button>
+
                 <button
                   className={`${styles.btn} ms-2`}
+                  data-testid="signin-button"
+                  type="button"
                   onClick={() => {
                     router.push("/");
                   }}
@@ -257,12 +262,14 @@ export default function Registration() {
                   <span></span>
                   <span></span>
                   <span></span>
-                  <span></span> Login
+                  <span></span> {t("sign-in-button")}
                 </button>
               </div>
             </Col>
           </Row>
         </Form>
+      </div>
+      <LanguageChange />
       </div>
       {/* )} */}
     </>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteUserData } from "../../services/login";
+import { deleteUserDataService } from "../../services/login";
 
 import errorHandler from "../../utils/error-handler";
 
@@ -19,7 +19,7 @@ export const deleteUser = createAsyncThunk(
   "User/deleteUser",
   async (userName:string) => {
     try {
-      const response = await deleteUserData(userName);
+      const response = await deleteUserDataService(userName);
       return response.data;
     } catch (_error: any) {
       const errorMessage = errorHandler(_error);

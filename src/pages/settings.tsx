@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Container, Row, Col,Dropdown,Modal} from "react-bootstrap";
+import { Button, Form, Row, Col,Dropdown,Modal} from "react-bootstrap";
 import { ToastAlert } from "../client/components/toast-alert/toast-alert";
 import {regexForName} from "../client/resources/constants";
 import  RootState from "../client/store";
@@ -182,6 +182,7 @@ const UserProfile = () => {
                     onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
                       handleUpdateUser(event)
                     }
+                    type="button"
                     className={styles.btn}
                   >
                     Update
@@ -191,6 +192,7 @@ const UserProfile = () => {
                     data-testid="edit-button"
                     onClick={() => setEdit(true)}
                     className={styles.btn}
+                    type="button"
                   >
                     Edit
                   </button>

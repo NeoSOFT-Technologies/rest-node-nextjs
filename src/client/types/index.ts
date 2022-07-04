@@ -1,9 +1,4 @@
-
-
-
-export interface LoginData {
- 
- 
+export interface ILoginData {
   firstName: string;
   lastName: string;
   userName: string;
@@ -11,17 +6,17 @@ export interface LoginData {
   _id:string
 }
 export interface LoginPageState {
-  data?: LoginData;
+  data?: ILoginData;
   loading: boolean;
   error?: string;
 }
-export interface RegisterData {
+export interface IRegisterData {
   firstName: string;
   lastName: string;
   userName: string;
   password: string;
 }
-export interface RegisterDatas {
+export interface IRegisterDatas {
   firstName: string;
   lastName: string;
   userName: string;

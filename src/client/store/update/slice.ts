@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {  updateUserData } from "../../services/login";
+import {  updateUserDataService} from "../../services/login";
 import { IUserDetail } from "../../types/index";
 import errorHandler from "../../utils/error-handler";
 
@@ -19,7 +19,7 @@ export const updateUser = createAsyncThunk(
   "User/update",
   async (data: IUserDetail) => {
     try {
-      const response = await  updateUserData(data);
+      const response = await  updateUserDataService(data);
       return response.data;
     } catch (_error: any) {
       const errorMessage = errorHandler(_error);

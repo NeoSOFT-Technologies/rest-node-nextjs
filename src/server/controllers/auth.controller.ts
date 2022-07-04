@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
 import authService from "../services/auth.service";
-const login = async (req: NextApiRequest, res: NextApiResponse) => {
+const userCtrl = {
+ login : async (req: NextApiRequest, res: NextApiResponse) => {
   const { userName, password }: { userName: string; password: string } =
     req.body;
 
@@ -11,9 +11,9 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const user = await authService.login({ userName, password });
   res.status(200).json({ ...user });
-};
+},
 
-const register = async (req: NextApiRequest, res: NextApiResponse) => {
+register:async (req: NextApiRequest, res: NextApiResponse) => {
   
   const {
     userName,
@@ -38,9 +38,9 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     lastName,
   });
   res.status(201).json({ ...user });
-};
+},
 
-const updateUser = async (req: NextApiRequest, res: NextApiResponse) => {
+updateUser : async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     userName,
     firstName,
@@ -56,16 +56,18 @@ const updateUser = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const user = await authService.updateUser({ userName, firstName, lastName });
   res.status(200).json({ ...user });
-};
+},
 
-const deleteUser = async (req: NextApiRequest, res: NextApiResponse) => {
+deleteUser : async (req: NextApiRequest, res: NextApiResponse) => {
 const userName=req.query.userName as string
+
   if (!userName ) {
     throw new Error("data ia not found");
   }
 
   const user = await authService.deleteUser({ userName });
   res.status(200).json({ ...user });
-};
+}
+}
 
-export default { login, register, updateUser ,deleteUser};
+export default userCtrl

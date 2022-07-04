@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { validateUserLoginCredentials } from "../../services/login";
+import { userLoginService } from "../../services/login";
 import { LoginPageState } from "../../types/index";
 import errorHandler from "../../utils/error-handler";
 
@@ -17,7 +17,7 @@ export const getUserDetails = createAsyncThunk(
   "login/user",
   async (credentials: ILoginDataConditions) => {
     try {
-      const response = await validateUserLoginCredentials(credentials);
+      const response = await userLoginService(credentials);
       console.log(response);
       return response;
     } catch (_error: any) {
@@ -31,12 +31,8 @@ const slice = createSlice({
   name: "user-login",
   initialState,
   reducers: {
-    resetUserLogin: (state) => {
-      state.loading = false;
-      state.data = undefined;
-      state.error = undefined;
-      localStorage.clear();
-    },
+   
+  
   },
   extraReducers(builder): void {
     builder.addCase(getUserDetails.pending, (state) => {
@@ -55,5 +51,5 @@ const slice = createSlice({
     });
   },
 });
-export const { resetUserLogin } = slice.actions;
+
 export default slice.reducer;
