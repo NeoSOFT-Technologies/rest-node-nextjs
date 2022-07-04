@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  rest-node-nextjs:
+    container_name: rest-node-nextjs
+    build: .
+    ports:
+      - 3000:3000
+    networks:
+      - internal
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    hostname: mongodb
+    networks:
+      - internal
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'mongodb:/data/db'
+  
+  # Add more containers below (nginx, postgres, etc.)
+  # Define a network, which allows containers to communicate
+  # with each other, by using their container name as a hostname
+  
+networks:
+  internal:
+volumes:
+  mongodb:
+
