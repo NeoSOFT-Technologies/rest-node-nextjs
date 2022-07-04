@@ -22,7 +22,7 @@ export const addNewUser = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (_error: any) {
-      console.log(_error);
+      // console.log(_error);
       const errorMessage = errorHandler(_error);
       throw new Error(errorMessage);
     }
