@@ -7,7 +7,7 @@ export default function Header() {
     <div>
       <Navbar bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Welcome to NextJs</Navbar.Brand>
+          <Navbar.Brand >Welcome to NextJs</Navbar.Brand>
           <Nav className="me-auto">
             <span  className="text-light m-3"  onClick={() => {
           router.push("/dashboard");
