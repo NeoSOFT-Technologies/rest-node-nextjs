@@ -54,7 +54,7 @@ const UserProfile = () => {
     setUser({ ...User, [name]: value });
   };
   const handleValidate = () => {
-    return (!error.firstName && !error.lastName);
+    return !error.firstName && !error.lastName;
   };
   const handleUpdateUser = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
