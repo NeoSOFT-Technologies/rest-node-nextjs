@@ -12,17 +12,17 @@ export const userLoginService = async (credentials: any) => {
 
 export function createNewUserService(data: IRegisterData) {
   console.log(data);
-  return apiFactory().post("api/auth/register", data);
+  return apiFactory().post("api/user", data);
 }
 
 export function updateUserDataService(data: IUserDetail) {
   const body = {
   ...data
   };
-  return apiFactory().patch("api/auth/update", body);
+  return apiFactory().patch("api/user", body);
 }
 
 export function deleteUserDataService(userName:string) {
  
-  return apiFactory().delete(`api/auth/delete/${userName}`);
+  return apiFactory().delete(`api/user/${userName}`);
 }

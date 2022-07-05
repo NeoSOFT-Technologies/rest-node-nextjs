@@ -78,12 +78,12 @@ export default function Registration() {
     setUser({ ...user, [name]: value });
   };
   const handleValidate = () => {
-    return !!(
-      error.firstName === "" &&
-      error.lastName === "" &&
-      error.userName === "" &&
-      error.password === "" &&
-      error.cnfpassword === ""
+    return (
+      !error.firstName &&
+      !error.lastName &&
+      !error.userName &&
+      !error.password &&
+      !error.cnfpassword 
     );
   };
   console.log(handleValidate());
