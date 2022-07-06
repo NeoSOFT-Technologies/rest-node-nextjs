@@ -3,7 +3,7 @@ import store from "../index";
 import { deleteUser } from "./slice";
 
 test("calling the state of add-tenant", async () => {
-  mockApi.onDelete("api/auth/delete/deepthi").reply(200, {});
+  mockApi.onDelete("api/user/deepthi").reply(200, {});
 
   const result = await store.dispatch(
     deleteUser("deepthi")
@@ -12,7 +12,7 @@ test("calling the state of add-tenant", async () => {
 });
 
 test("calling the state of add-tenant", async () => {
-  mockApi.onDelete("api/auth/delete/deepthi").reply(404);
+  mockApi.onDelete("api/user/deepthi").reply(404);
 
   const result = await store.dispatch(
     deleteUser("deepthi")

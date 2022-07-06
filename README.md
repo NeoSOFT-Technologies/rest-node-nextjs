@@ -29,6 +29,29 @@ Take it for a test drive. We'd love to hear any feedback you have or if you've t
 
 ## Features
 
+- **Quick start**
+- **Integrated ESLint, Prettier and Husky**
+- **Simple and Standard scaffolding**
+- **Production-Ready Skeleton**
+- **Followed SOLID Principles**
+- **Authentication**: for both server/client using [next-auth](https://www.npmjs.com/package/next-auth)
+- **Image Optimization**: using next/images
+- **Server Side Rendering**
+- **PerPage Layout**
+- **TypeOrm with Mongodb**: storing data in backend
+- **Common Error Handler**
+- **Auth Guard**
+- **Localization**
+- **SEO stratergy**
+- **Next generation Sass**
+- **Form Validation Using Regex**
+- **Testing**: unit and integration tests using [Jest](https://jestjs.io)
+- **Environment variables**: segregated env files for easier variable management.
+- **CI**: Continuous integration
+- **Docker support**
+- **Git hooks**: with [husky](https://github.com/typicode/husky) 
+- **Linting**: with [ESLint](https://eslint.org) and [Prettier](https://prettier.io)
+
 
 
 ## Getting started
@@ -209,9 +232,10 @@ Please find below a detailed description of the app's folder structures:
 
 >This flow start works in server, whenever  there is a request from the client. 
 
-![Request Workflow](https://github.com/NeoSOFT-Technologies/rest-node-nextjs/blob/main/wiki/images/code-flow.jpg?raw=true)
+![Request Workflow](https://github.com/NeoSOFT-Technologies/rest-node-nextjs/blob/main/wiki/images/backend%20code-flow.jpg?raw=true)
 
 ### 2. Modules
+
 
 
 

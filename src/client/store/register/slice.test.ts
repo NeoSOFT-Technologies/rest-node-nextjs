@@ -3,7 +3,7 @@ import store from "../index";
 import { addNewUser } from "./slice";
 
 test("calling the state of add-tenant", async () => {
-  mockApi.onPost("api/auth/register").reply(200, {});
+  mockApi.onPost("api/user").reply(200, {});
 
   const result = await store.dispatch(
     addNewUser({
@@ -17,7 +17,7 @@ test("calling the state of add-tenant", async () => {
 });
 
 test("calling the state of add-tenant", async () => {
-  mockApi.onPost("api/auth/register").reply(404);
+  mockApi.onPost("api/user").reply(404);
 
   const result = await store.dispatch(
     addNewUser({

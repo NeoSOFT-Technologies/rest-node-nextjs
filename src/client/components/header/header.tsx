@@ -9,10 +9,10 @@ export default function Header() {
         <Container>
           <Navbar.Brand >Welcome to NextJs</Navbar.Brand>
           <Nav className="me-auto">
-            <span  className="text-light m-3"  onClick={() => {
+            <span  className="text-light m-3"  data-testid="navbar-dashboard" onClick={() => {
           router.push("/dashboard");
         }}>Dashboard</span>
-          <span className="text-light m-3"  onClick={() => {
+          <span className="text-light m-3"  data-testid="navbar-settings" onClick={() => {
           router.push("/settings");
         }}>Settings</span>
            
@@ -22,6 +22,7 @@ export default function Header() {
         </Container>
         <Button
         className="btn-light btn-sm me-4"
+        data-testid="navbar-logout"
         onClick={() => {
           router.push("/");
         }}

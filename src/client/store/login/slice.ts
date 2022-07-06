@@ -15,15 +15,19 @@ const initialState: LoginPageState = {
 
 export const getUserDetails = createAsyncThunk(
   "login/user",
-  async (credentials: ILoginDataConditions) => {
-    try {
-      const response = await userLoginService(credentials);
-      console.log(response);
-      return response;
-    } catch (_error: any) {
-      const errorMessage = errorHandler(_error);
-      throw new Error(errorMessage);
+  async (data: LoginPageState) => {
+    // try {
+    //   const response = await userLoginService(credentials);
+    //   console.log(response);
+    //   return response;
+    // } catch (_error: any) {
+    //   const errorMessage = errorHandler(_error);
+    //   throw new Error(errorMessage);
+    // }
+    if (data.error) {
+      throw new Error(data.error);
     }
+    return data.data;
   }
 );
 
@@ -31,8 +35,8 @@ const slice = createSlice({
   name: "user-login",
   initialState,
   reducers: {
-   
-  
+
+
   },
   extraReducers(builder): void {
     builder.addCase(getUserDetails.pending, (state) => {
@@ -42,7 +46,7 @@ const slice = createSlice({
     });
     builder.addCase(getUserDetails.fulfilled, (state, action) => {
       state.loading = false;
-      localStorage.setItem("userName", JSON.stringify(action.payload.userName));
+      
       state.data = action.payload;
     });
     builder.addCase(getUserDetails.rejected, (state, action) => {

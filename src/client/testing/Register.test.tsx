@@ -4,9 +4,10 @@ import "@testing-library/jest-dom/extend-expect";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../store/index";
-
 import Registration from "../../pages/register";
 import "../i18n/config";
+
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 it("render without crashing Registration", () => {
   render(
     <BrowserRouter>
@@ -63,6 +64,9 @@ it("test if input box is present", () => {
 });
 
 it("render without crashing button", () => {
+  useRouter.mockImplementationOnce(() => ({
+    push: jest.fn(),
+  }));
     render(
       <BrowserRouter>
         <Provider store={store}>
@@ -74,5 +78,5 @@ it("render without crashing button", () => {
     const loginBtn = screen.getByTestId("signin-button");
     expect(loginBtn ).toBeInTheDocument();
     expect(loginBtn ).toHaveAttribute("type", "button");
-    //fireEvent.click(loginBtn);
+    fireEvent.click(loginBtn);
   });

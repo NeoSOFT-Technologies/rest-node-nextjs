@@ -8,6 +8,7 @@ import ErrorBoundary from "../client/components/error-boundary/ErrorBoundary";
 import Header from "../client/components/header/header";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
+import { SessionProvider } from "next-auth/react";
 
 import "../client/i18n/config";
 
@@ -21,25 +22,29 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   if (Component.getLayout) {
     return Component.getLayout(
-      <Provider store={store}>
-        <ErrorBoundary>
-          <Authguard>
-            <Component {...pageProps} />
-          </Authguard>
-        </ErrorBoundary>
-      </Provider>
+      <SessionProvider session={pageProps.session} >
+        <Provider store={store}>
+          <ErrorBoundary>
+            <Authguard>
+              <Component {...pageProps} />
+            </Authguard>
+          </ErrorBoundary>
+        </Provider>
+      </SessionProvider>
     );
   }
   return (
     <>
       <Header />
-      <Provider store={store}>
-        <ErrorBoundary>
-          <Authguard>
-            <Component {...pageProps} />
-          </Authguard>
-        </ErrorBoundary>
-      </Provider>
+      <SessionProvider session={pageProps.session} >
+        <Provider store={store}>
+          <ErrorBoundary>
+            <Authguard>
+              <Component {...pageProps} />
+            </Authguard>
+          </ErrorBoundary>
+        </Provider>
+      </SessionProvider>
     </>
   );
 }

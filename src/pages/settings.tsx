@@ -115,7 +115,7 @@ const UserProfile = () => {
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Control
-                    data-testid="UserName-input"
+                    data-testid="firstName-input"
                     type="text"
                     className={styles.inputstyle}
                     placeholder="Enter FirstName"
@@ -134,8 +134,9 @@ const UserProfile = () => {
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Control
-                    data-testid="UserName-input"
+                  
                     type="text"
+                    data-testid="lastName-input"
                     placeholder="Enter LastName"
                     name="lastName"
                     className={styles.inputstyle}
@@ -154,6 +155,7 @@ const UserProfile = () => {
                 <Form.Group className="mb-3">
                   <Form.Control
                     type="text"
+                    data-testid="userName-input"
                     placeholder="Enter UserName"
                     value={User.userName}
                     className={styles.inputstyle}

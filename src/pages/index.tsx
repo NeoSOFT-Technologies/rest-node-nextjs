@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { Form, InputGroup } from "react-bootstrap";
+import { signIn, getCsrfToken, useSession } from 'next-auth/react';
 import PasswordButtons from "../client/components/password-field/PasswordButtons";
 import { ReactElement, useState } from "react";
 import { useAppDispatch } from "../client/store/hooks";
@@ -9,12 +10,14 @@ import styles from "../client/styles/Login.module.scss";
 import RootState from "../client/store";
 import { useTranslation } from "react-i18next";
 import LanguageChange from "../client/components/i18n/LanguageChange";
+import { ILoginData, LoginPageState } from "../client/types";
 export default function Login() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({ userName: "", password: "" });
   const [showPassword, setShowpassword] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleInputChange = (event: any) => {
     event.preventDefault();
@@ -31,13 +34,27 @@ export default function Login() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    await dispatch(getUserDetails({ ...formData }));
-    const result = RootState.getState().login;
-    if (result.data) {
-      ToastAlert("LoggedIn successfully", "success");
-      router.push("/dashboard");
-    } else {
-      ToastAlert("Incorrect credentials", "warning");
+    const res = await signIn('credentials', {
+      redirect: false,
+      userName: formData.userName,
+      password: formData.password,
+      callbackUrl: "/dashboard",
+    });
+
+    if (res?.status || res?.error) {
+      const data: LoginPageState = {
+        data: session?.userData as ILoginData,
+        loading: false,
+        error: res.error,
+      }
+      console.log("session", session);
+      await dispatch(getUserDetails(data));
+      if (res.ok) {
+        ToastAlert("LoggedIn successfully", "success");
+        router.push("/dashboard");
+      } else {
+        ToastAlert("Incorrect credentials", "warning");
+      }
     }
   };
 
@@ -117,3 +134,11 @@ export default function Login() {
 Login.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>;
 };
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  };
+}
