@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main","dev","master" ]
+  pull_request:
+    branches: [ "main","dev","master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x]
+    
+    steps:
+    # check-out repository so workflow can access it .
+    - name: Checkout
+      uses: actions/checkout@v3
+    # setup node.js with provided version nor commamd execution.
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    # cleaning cache (prevents from hamper your performance to a great extend).
+    - name: clean cache
+      run: npm cache clean --force
+    # 
+    - name: Install dependencies
+      run: npm install
+    # 
+    - name: Run lint
+      run: npm run lint
+    # 
+    - name: Run tests
+      run: npm run test
+    # 
+    - name: Run Build
+      run: npm run build
+      env:
+        CI: false

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
-import handler from "../../../server/configs/next-connect";
+import handler from "../../../server/utils/next-connect";
 import userCtrl from "../../../server/controllers/user.controllers";
 
 const secret = "secret key";

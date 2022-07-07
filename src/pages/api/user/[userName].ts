@@ -1,4 +1,9 @@
-import handler from "../../../server/configs/next-connect";
-import userCtrl from "../../../server/controllers/user.controllers";
+import handler from "../../../server/utils/next-connect";
+import userController from "../../../server/controllers/user.controllers";
 
-export default handler.delete(userCtrl.deleteUser);
+handler
+  .get(userController.getUser)
+  .patch(userController.updateUser)
+  .delete(userController.deleteUser);
+
+export default handler;

@@ -83,7 +83,7 @@ export default function Registration() {
       !error.lastName &&
       !error.userName &&
       !error.password &&
-      !error.cnfpassword 
+      !error.cnfpassword
     );
   };
   console.log(handleValidate());

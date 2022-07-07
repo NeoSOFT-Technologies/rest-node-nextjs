@@ -14,7 +14,7 @@ export default function Dashboard({ posts }: { posts: any }) {
             return (
               <Col md="4" sm="12" key={post.id}>
                 <div>
-                  <h6   data-testid="author-name">{post.author}</h6>
+                  <h6 data-testid="author-name">{post.author}</h6>
                   <Image
                     src={post.download_url}
                     alt="Picture of the author"

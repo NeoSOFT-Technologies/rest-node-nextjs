@@ -37,6 +37,11 @@ export interface IUserDetail{
   lastName: string;
   userName: string;
 }
+export interface IUpdateUser{
+  firstName: string;
+  lastName: string;
+}
+
 export interface IErrorUserDetail{
   firstName: string;
   lastName: string;

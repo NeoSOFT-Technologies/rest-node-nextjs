@@ -1,4 +1,4 @@
-import handler from "../../../server/configs/next-connect";
-import authCtrl from "../../../server/controllers/auth.controller";
+import handler from "../../../server/utils/next-connect";
+import authController from "../../../server/controllers/auth.controller";
 
-export default handler.post(authCtrl.login);
+export default handler.post(authController.login);
