@@ -13,8 +13,9 @@ async function connectDb() {
       url: "mongodb://localhost:27017",
       database: "nextjs-boilerplate",
       useNewUrlParser: true,
+      synchronize: false,
       logging: true,
-      synchronize: true,
+      //synchronize: true,
       entities: [User],
     });
 

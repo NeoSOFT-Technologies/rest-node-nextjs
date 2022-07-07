@@ -17,7 +17,7 @@ export default NextAuth({
           type: 'password'
         },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials, _req) {
         const payload: any = {
           userName: credentials?.userName,
           password: credentials?.password,

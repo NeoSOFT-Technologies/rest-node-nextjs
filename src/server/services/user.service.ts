@@ -52,7 +52,7 @@ createUser : async ({
   firstName: string;
   lastName: string;
 }) => {
-  const userRepo = await getRepo(User);
+  const userRepo = await getRepo("User");
   await userRepo.updateOne({ userName }, { $set: { firstName, lastName } });
   const user = await userRepo.findOne({ where: { userName } });
   return user;
@@ -64,7 +64,7 @@ createUser : async ({
   userName: string;
   
 }) => {
-  const userRepo = await getRepo(User);
+  const userRepo = await getRepo("User");
   
   return  userRepo.deleteOne({userName});
 },

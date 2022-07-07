@@ -34,7 +34,7 @@ const UserProfile = () => {
       setUser({ ...result.data });
     }
   }, [result.data]);
-  console.log(User, "hii", User.userName);
+  //console.log(User, "hii", User.userName);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {
@@ -93,7 +93,7 @@ const UserProfile = () => {
               </Dropdown.Menu>
             </Dropdown>
           </div>
-          <Modal show={deleteshow} onHide={() => setDeleteshow(false)} centered>
+          <Modal show={deleteshow} onHide={() => setDeleteshow(false)} data-testid="modal-item" centered>
             <Modal.Header closeButton>
               <Modal.Title>Delete User</Modal.Title>
             </Modal.Header>

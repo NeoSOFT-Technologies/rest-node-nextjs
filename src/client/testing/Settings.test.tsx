@@ -5,16 +5,13 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-
 import UserProfile from "../../pages/settings";
-
-
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 const mockStore = configureStore([thunk]);
 const store = mockStore({
   result: {
-    data: {_id: '62c3c8ce504ab9391c416b91', firstName: 'srihitha123', lastName: 'mary', userName: 'Marysrihitha123', password: 'abc@12345'},
+    data: { firstName: 'srihitha123', lastName: 'mary', userName: 'Marysrihitha123'},
   error: false,
   loading: false,
   
@@ -102,6 +99,12 @@ it("should throw an error while entering a invalid firstname", () => {
 
 
 it("renders role select box and remove role button", async () => {
+
+  
+  // const setState = jest.fn();
+  // const useStateSpy = jest.spyOn(React, 'useState')
+  // useStateSpy.mockImplementationOnce(() => ({ init:jest.fn(),}))
+  //useStateSpy.mockImplementation((init: any) => [init, setState]);
   render(
     <BrowserRouter>
       <Provider store={store}>
@@ -117,7 +120,10 @@ it("renders role select box and remove role button", async () => {
 
       const editBtn = screen.getByTestId("dropdown-items");
       fireEvent.click(editBtn);
-    
+     
+      const model=screen.getByTestId("modal-item")
+      expect(model).toBeInTheDocument();
+
       const roleItem = screen.getByTestId("role-items");
       expect(roleItem).toBeInTheDocument();
       fireEvent.click(roleItem);

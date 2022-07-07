@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
-
 import { Row, Col, Container } from "react-bootstrap";
+import { useSession, signIn, signOut } from "next-auth/react"
 export default function Dashboard({ posts }: { posts: any }) {
+ 
+  
+ 
   return (
     <>
       <Container className="p-3">
@@ -31,7 +34,6 @@ export async function getServerSideProps() {
   const response = await fetch("https://picsum.photos/v2/list");
   const data = await response.json();
   const res = data.slice(1, 6);
-
   return {
     props: {
       posts: res,

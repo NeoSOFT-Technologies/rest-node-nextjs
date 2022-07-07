@@ -1,64 +1,79 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import fetch from 'jest-fetch-mock';
-import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
 import { BrowserRouter } from "react-router-dom";
-import Dashboard from "../../pages/dashboard";
-const posts=[{"id":"0","author":"Alejandro Escamilla","width":5616,"height":3744,"url":"https://unsplash.com/photos/yC-Yzbqy7PY","download_url":"https://picsum.photos/id/0/5616/3744"}]
+import Dashboard ,{ getServerSideProps }from "../../pages/dashboard";
+
+
+const posts = [
+  {
+    "author": "Alejandro Escamilla",
+    "download_url": "https://picsum.photos/id/1/5616/3744",
+    "height": 3744,
+    "id": "1",
+    "url": "https://unsplash.com/photos/LNRyGwIJr5c",
+    "width": 5616,
+  },
+  {
+    "author": "Paul Jarvis",
+    "download_url": "https://picsum.photos/id/10/2500/1667",
+    "height": 1667,
+    "id": "10",
+    "url": "https://unsplash.com/photos/6J--NXulQCs",
+    "width": 2500,
+  },
+  {
+    "author": "Tina Rataj",
+    "download_url": "https://picsum.photos/id/100/2500/1656",
+    "height": 1656,
+    "id": "100",
+    "url": "https://unsplash.com/photos/pwaaqfoMibI",
+    "width": 2500,
+  },
+  {
+    "author": "Lukas Budimaier",
+    "download_url": "https://picsum.photos/id/1000/5626/3635",
+    "height": 3635,
+    "id": "1000",
+    "url": "https://unsplash.com/photos/6cY-FvMlmkQ",
+    "width": 5626,
+  },
+  {
+    "author": "Danielle MacInnes",
+    "download_url": "https://picsum.photos/id/1001/5616/3744",
+    "height": 3744,
+    "id": "1001",
+    "url": "https://unsplash.com/photos/1DkWWN1dr-s",
+    "width": 5616,
+  },
+]
 
 describe("App", () => {
   beforeEach(() => {
     fetch.resetMocks();
   });
-  it("handles errors on dog refresh",  () => {
+
+  it("handles errors on dog refresh", () => {
     render(
       <BrowserRouter>
-      <Dashboard posts={posts}/>
-     </BrowserRouter>
+        <Dashboard posts={posts} />
+      </BrowserRouter>
     );
-
     expect(screen.getByAltText("Picture of the author")).toBeInTheDocument();
-
-   
-    fetch.mockResponseOnce(JSON.stringify({ status: "error" }));
-
-   
   });
-  // it("handles initial errors", async () => {
-  //   render(
-  //     <BrowserRouter>
-  //   <Dashboard posts={posts}/>
-  //  </BrowserRouter>
-  //   );
 
-  //   expect(screen.getByText("Error fetching dog")).toBeInTheDocument();
-
-  //   fetch.mockResponseOnce(
-  //     JSON.stringify({ status: "success" })
-  //   );
-
-  //   userEvent.click(screen.getByRole("button"));
-
-  //   await screen.findByText("Loading new dog...");
-
-  //   await screen.findByAltText("Picture of the author");
-  // });
-  it("renders and fetches new dog",  () => {
-    render(
-      <BrowserRouter>
-    <Dashboard posts={posts}/>
-   </BrowserRouter>
-    );
-    expect(screen.getByTestId("author-name")).toBeInTheDocument();
-
+  it("should call picsum api", async () => {
     fetch.mockResponseOnce(
-      JSON.stringify({ status: "success"})
+      JSON.stringify(posts)
     );
-
-    // userEvent.click(screen.getByRole("button"));
-
-    // await screen.findByText("Loading new dog...");
-    // await screen.findByAltText("Picture of the author");
+    const response = await getServerSideProps();
+    expect(response).toEqual(
+      expect.objectContaining({
+        props: {
+          posts: posts
+        }
+      })
+    );
   });
 });

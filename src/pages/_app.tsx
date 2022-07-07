@@ -15,6 +15,7 @@ import "../client/i18n/config";
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
+console.log(Authguard)
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
