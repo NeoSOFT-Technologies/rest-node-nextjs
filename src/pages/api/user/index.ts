@@ -1,8 +1,8 @@
-import handler from "../../../server/configs/next-connect";
-import userCtrl from "../../../server/controllers/user.controllers";
-handler
+import handler from "../../../server/utils/next-connect";
+import userController from "../../../server/controllers/user.controllers";
 
-  .get(userCtrl.getUser)
-  .post(userCtrl.createUser)
-  .patch(userCtrl.updateUser);
+handler
+  .get(userController.getAllUser)
+  .post(userController.createUser);
+
 export default handler;

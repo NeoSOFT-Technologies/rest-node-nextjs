@@ -59,6 +59,7 @@ const UserProfile = () => {
   const handleUpdateUser = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (handleValidate()) {
+      console.log(User);
       dispatch(updateUser({ ...User }));
       setEdit(false);
     } else {
