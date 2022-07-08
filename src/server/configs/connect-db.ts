@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import dbconfig from "../configs/db.config";
+import dbconfig from "./db.config";
 
 let dataSource: DataSource;
 

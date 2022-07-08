@@ -1,4 +1,4 @@
-import getRepo from "../utils/get-repository";
+import getRepo from "../utils/getRepo";
 
 const userService = {
   getAllUser: async () => {

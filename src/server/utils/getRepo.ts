@@ -1,4 +1,4 @@
-import connectDb from "./connect-db";
+import connectDb from "../configs/connect-db";
 
 const getRepo = async (repoName: string) => {
   const dataSource = await connectDb();
