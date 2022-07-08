@@ -13,6 +13,7 @@ export function getAllUsersService(userName: string) {
 }
 // get a user data
 export function getUserDataService(userName: string) {
+  
   return apiFactory().get(`api/user/${userName}`);
 }
 // update a user data

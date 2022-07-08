@@ -6,6 +6,7 @@ import userController from "../../../server/controllers/user.controllers";
 const secret = "secret key";
 
 handler
+.get(userController.getUser)
   .use(async (req: NextApiRequest, res: NextApiResponse, next) => {
     const token = await getToken({ req, secret })
     if (token) {
@@ -13,7 +14,7 @@ handler
     }
     res.status(401).json({ msg: "unauthenticated user" });
   })
-  .get(userController.getUser)
+ 
   .delete(userController.deleteUser)
   .patch(userController.updateUser)
 export default handler;

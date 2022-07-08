@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col, Dropdown, Modal } from "react-bootstrap";
-import { ToastAlert } from "../client/components/toast-alert/toast-alert";
-import { regexForName } from "../client/resources/constants";
-import RootState from "../client/store";
-import { updateUser } from "../client/store/update/slice";
-import { useAppDispatch } from "../client/store/hooks";
-import { IErrorUserDetail, IUserDetail } from "../client/types";
+import { ToastAlert } from "../../client/components/toast-alert/toast-alert";
+import { regexForName } from "../../client/resources/constants";
+import RootState from "../../client/store";
+import { updateUser } from "../../client/store/update/slice";
+import { useAppDispatch, useAppSelector } from "../../client/store/hooks";
+import { IErrorUserDetail, IUserDetail } from "../../client/types";
 import { useRouter } from "next/router";
-import { deleteUser } from "../client/store/delete/slice";
-import styles from "../client/styles/Settings.module.scss";
+import { deleteUser } from "../../client/store/delete/slice";
+import styles from "../../client/styles/Settings.module.scss";
+import {userDetails} from "../../client/store/user-details/slice"
 
 const UserProfile = () => {
-  const result = RootState.getState().userDetailsState;
-  console.log(result);
+ 
+  const userDetailsState = useAppSelector(
+    (state: RootState) => state.userDetailsState
+  );
+
+
   const [edit, setEdit] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
-
+ 
   console.log(router);
   const [deleteshow, setDeleteshow] = useState(false);
   const [User, setUser] = useState<IUserDetail>({
@@ -30,11 +35,22 @@ const UserProfile = () => {
   });
 
   useEffect(() => {
-    if (result.data) {
-      setUser({ ...result.data });
-    }
-  }, [result.data]);
-  //console.log(User, "hii", User.userName);
+    console.log(router.query);
+    if (router.query.userName ) {
+     dispatch(
+        userDetails(
+        router.query.userName
+        )
+      );
+   
+    
+      }
+  }, [router.query.userName]);
+  useEffect(() => {
+   
+    if (userDetailsState.data) setUser({ ...userDetailsState.data });
+  }, [userDetailsState.data]);
+  console.log(User, "hii", User.userName);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {

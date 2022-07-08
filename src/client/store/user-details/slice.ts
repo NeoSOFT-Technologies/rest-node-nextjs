@@ -20,6 +20,8 @@ export const userDetails = createAsyncThunk(
   async (userName: string) => {
     try {
       const response = await getUserDataService(userName);
+      //console.log(userName,userName.userName)
+      console.log(response)
       return response.data;
     } catch (_error: any) {
       const errorMessage = errorHandler(_error);

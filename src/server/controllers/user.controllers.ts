@@ -9,7 +9,7 @@ const userController = {
     const userName = req.query.userName as string
     if (!userName) { throw new Error("please provide userName "); }
     const user = await userService.getUser({ userName });
-    res.status(200).json({ user });
+    res.status(200).json(user );
   },
   createUser: async (req: NextApiRequest, res: NextApiResponse) => {
     const { userName, password, firstName, lastName, }: { userName: string; password: string; firstName: string; lastName: string; } = req.body;

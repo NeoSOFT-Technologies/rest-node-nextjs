@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 function Authguard({ children }: { children: any }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
-  //const userData = useSelector((root: any) => root.login);
+  const userData = useSelector((root: any) => root.login);
   const { data: session } = useSession()
   
 
@@ -15,18 +15,18 @@ function Authguard({ children }: { children: any }) {
       // redirect to login page if accessing a private page and not logged in
       const publicPaths = ["/"];
       const path = url.split("?")[0];
-     
-     console.log(session,path)
-      if (!session && !publicPaths.includes(path)) {
+      console.log(session,path)
+      console.log(authorized,"beforeif")
+      if (!userData.data &&!session && !publicPaths.includes(path)) {
         setAuthorized(false);
-    
+    console.log(authorized,"if")
         router.push({
           pathname: "/",
           query: { returnUrl: url },
         });
       } else {
         setAuthorized(true);
-       
+        console.log(authorized,"else")
       }
     }
     authCheck(router.asPath);
@@ -38,7 +38,7 @@ function Authguard({ children }: { children: any }) {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-  }, [router, router.asPath, router.events, session]);
+  }, [authorized, router, router.asPath, router.events, session, userData.data]);
 
   return authorized && children;
 }

@@ -1,8 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Nav, Container, Navbar, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 export default function Header() {
   const router = useRouter();
+  const userData = useSelector((root: any) => root.login);
+  console.log(userData.data.userName)
   return (
     <div>
       <Navbar bg="primary" variant="dark">
@@ -13,7 +16,7 @@ export default function Header() {
           router.push("/dashboard");
         }}>Dashboard</span>
           <span className="text-light m-3"  data-testid="navbar-settings" onClick={() => {
-          router.push("/settings");
+          router.push(`/settings/${userData.data.userName}`);
         }}>Settings</span>
            
            

@@ -4,7 +4,7 @@ import { signIn, getCsrfToken, useSession } from 'next-auth/react';
 import PasswordButtons from "../client/components/password-field/PasswordButtons";
 import { ReactElement, useState } from "react";
 import { useAppDispatch } from "../client/store/hooks";
-//import { getUserDetails } from "../client/store/login/slice";
+import { getUserDetails } from "../client/store/login/slice";
 import { ToastAlert } from "../client/components/toast-alert/toast-alert";
 import styles from "../client/styles/Login.module.scss";
 import RootState from "../client/store";
@@ -38,25 +38,25 @@ export default function Login() {
       redirect: false,
       userName: formData.userName,
       password: formData.password,
-      // callbackUrl: "/dashboard",
+      callbackUrl: "/dashboard",
     });
     console.log(res)
 
-    // if (res?.status || res?.error) {
-    //   const data: LoginPageState = {
-    //     data: session?.userData as ILoginData,
-    //     loading: false,
-    //     error: res.error,
-    //   }
-      // console.log("session", session);
-      // await dispatch(getUserDetails(data));
+    if (res?.status || res?.error) {
+      const data: LoginPageState = {
+        data: session?.userData as ILoginData,
+        loading: false,
+        error: res.error,
+      }
+      console.log("session", session);
+      await dispatch(getUserDetails(data));
       if (res?.ok) {
         ToastAlert("LoggedIn successfully", "success");
         router.push("/dashboard");
       } else {
         ToastAlert("Incorrect credentials", "warning");
       }
-    
+    }
   };
 
   return (
