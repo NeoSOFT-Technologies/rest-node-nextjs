@@ -11,7 +11,7 @@ import { deleteUser } from "../client/store/delete/slice";
 import styles from "../client/styles/Settings.module.scss";
 
 const UserProfile = () => {
-  const result = RootState.getState().login;
+  const result = RootState.getState().userDetailsState;
   console.log(result);
   const [edit, setEdit] = useState(false);
   const dispatch = useAppDispatch();

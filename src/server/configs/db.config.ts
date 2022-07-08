@@ -5,7 +5,7 @@ const dbconfig: DataSource = new DataSource({
     type: "mongodb",
     host: process.env.DB_HOST || "localhost",
     port: 27017,
-    database: process.env.DB_NAME || "nextjs-datebase",
+    database: process.env.DB_NAME || "nextjs-boilerplate",
     useNewUrlParser: true,
     logging: true,
     synchronize: true,

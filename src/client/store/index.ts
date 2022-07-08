@@ -1,14 +1,16 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import loginReducer from "./login/slice";
+// import loginReducer from "./login/slice";
 import addNewUserReducer from "./register/slice";
 import updateUserReducer from "./update/slice";
 import deleteUserReducer from "./delete/slice"
+import userDetailsReducer from "./user-details/slice"
 const store = configureStore({
   reducer: {
-    login: loginReducer,
+    //login: loginReducer,
     addNewUserState: addNewUserReducer,
     updateUserState:updateUserReducer,
     deleteUserState:deleteUserReducer,
+    userDetailsState:userDetailsReducer,
   },
 });
 

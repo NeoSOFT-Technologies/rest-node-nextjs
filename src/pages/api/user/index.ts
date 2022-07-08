@@ -1,19 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getToken } from "next-auth/jwt";
-import handler from "../../../server/utils/next-connect";
-import userCtrl from "../../../server/controllers/user.controllers";
 
-const secret = "secret key";
+import handler from "../../../server/utils/next-connect";
+import userController from "../../../server/controllers/user.controllers";
+
+
 
 handler
-  .use(async (req: NextApiRequest, res: NextApiResponse, next) => {
-    const token = await getToken({ req, secret })
-    if (token) {
-      return next();
-    }
-    res.status(401).json({ msg: "unauthenticated user" });
-  })
-  .get(userCtrl.getUser)
-  .post(userCtrl.createUser)
-  .patch(userCtrl.updateUser)
+ 
+  .post(userController.createUser)
+
 export default handler;

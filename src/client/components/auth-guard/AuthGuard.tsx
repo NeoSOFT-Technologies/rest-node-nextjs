@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 function Authguard({ children }: { children: any }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
-  const userData = useSelector((root: any) => root.login);
+  //const userData = useSelector((root: any) => root.login);
   const { data: session } = useSession()
   
 
@@ -16,8 +16,8 @@ function Authguard({ children }: { children: any }) {
       const publicPaths = ["/"];
       const path = url.split("?")[0];
      
-    
-      if (!userData.data && !session && !publicPaths.includes(path)) {
+     console.log(session,path)
+      if (!session && !publicPaths.includes(path)) {
         setAuthorized(false);
     
         router.push({
@@ -38,7 +38,7 @@ function Authguard({ children }: { children: any }) {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-  }, [router, router.asPath, router.events, session, userData]);
+  }, [router, router.asPath, router.events, session]);
 
   return authorized && children;
 }

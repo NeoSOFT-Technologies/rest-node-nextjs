@@ -1,12 +1,7 @@
 import apiFactory from "../utils/api-factory";
 import { IRegisterData, IUpdateUser } from "../types/index";
 
-// login auth
-export const userLoginService = async (credentials: any) => {
-  const response = await apiFactory().post("api/auth/login", { userName: credentials.userName, password: credentials.password, });
-  console.log("printing", response.data);
-  return response.data;
-};
+
 // create a new user
 export function createNewUserService(data: IRegisterData) {
   console.log(data);
@@ -17,7 +12,7 @@ export function getAllUsersService(userName: string) {
   return apiFactory().get(`api/user`);
 }
 // get a user data
-export function getUserService(userName: string) {
+export function getUserDataService(userName: string) {
   return apiFactory().get(`api/user/${userName}`);
 }
 // update a user data
