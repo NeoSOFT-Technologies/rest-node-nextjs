@@ -8,7 +8,7 @@ import ErrorBoundary from "../client/components/error-boundary/ErrorBoundary";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import { SessionProvider } from "next-auth/react";
-//import Header from "../client/components/header/Header";
+import Header from "../client/components/header/Header";
 import "../client/i18n/config";
 
 export type NextPageWithLayout = NextPage & {
@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <SessionProvider session={pageProps.session} >
         <Provider store={store}>
           <ErrorBoundary>
-          {/* <Header /> */}
+          <Header />
             <Authguard>
               <Component {...pageProps} />
             </Authguard>
