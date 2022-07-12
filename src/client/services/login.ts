@@ -1,16 +1,12 @@
 import apiFactory from "../utils/api-factory";
 import { IRegisterData, IUpdateUser } from "../types/index";
 
-
 // create a new user
 export function createNewUserService(data: IRegisterData) {
   console.log(data);
   return apiFactory().post("api/user", data);
 }
-// get all users data
-export function getAllUsersService(userName: string) {
-  return apiFactory().get(`api/user`);
-}
+
 // get a user data
 export function getUserDataService(userName: string) {
   

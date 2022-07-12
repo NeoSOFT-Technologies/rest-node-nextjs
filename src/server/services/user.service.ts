@@ -1,4 +1,3 @@
-import getRepo from "../utils/get-repository";
 import connectDb from "../utils/connect-db";
 import { User } from "../entities/user";
 

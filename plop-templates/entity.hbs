@@ -1,0 +1,9 @@
+import { ObjectId } from "mongodb";
+import { Entity, Column, ObjectIdColumn } from "typeorm";
+
+@Entity()
+export class {{camelCase name}} {
+  @ObjectIdColumn()
+  _id: ObjectId;
+
+}

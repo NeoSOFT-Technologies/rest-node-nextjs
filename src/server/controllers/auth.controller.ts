@@ -6,7 +6,7 @@ const authController = {
     const { userName, password }: { userName: string; password: string } = req.body;
     if (!userName || !password) { throw new Error("please provide userName and password both"); }
     const user = await authService.login({ userName, password });
-    console.log(user.userName)
+    //console.log(user.userName)
     res.status(200).json(user.userName);
   }
 }
