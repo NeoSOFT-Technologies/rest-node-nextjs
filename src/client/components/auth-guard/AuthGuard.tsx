@@ -6,18 +6,17 @@ function Authguard({ children }: { children: any }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
   const userData = useSelector((root: any) => root.login);
-  const { data: session } = useSession()
+  const { status} = useSession()
   
 
   useEffect(() => {
 
     function authCheck(url: string) {
       // redirect to login page if accessing a private page and not logged in
-      const publicPaths = ["/"];
+      const publicPaths = ["/","/register"];
       const path = url.split("?")[0];
-      console.log(session,path)
-      console.log(authorized,"beforeif")
-      if (!userData.data &&!session && !publicPaths.includes(path)) {
+    
+      if (!userData.data && status == "unauthenticated" && !publicPaths.includes(path)) {
         setAuthorized(false);
     console.log(authorized,"if")
         router.push({
@@ -38,7 +37,7 @@ function Authguard({ children }: { children: any }) {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-  }, [authorized, router, router.asPath, router.events, session, userData.data]);
+  }, [authorized, router, router.asPath, router.events, status, userData.data]);
 
   return authorized && children;
 }

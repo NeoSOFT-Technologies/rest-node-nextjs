@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col, Dropdown, Modal } from "react-bootstrap";
 import { ToastAlert } from "../../client/components/toast-alert/toast-alert";
 import { regexForName } from "../../client/resources/constants";
-import RootState from "../../client/store";
+import {RootState } from "../../client/store";
 import { updateUser } from "../../client/store/update/slice";
 import { useAppDispatch, useAppSelector } from "../../client/store/hooks";
 import { IErrorUserDetail, IUserDetail } from "../../client/types";
@@ -10,21 +10,14 @@ import { useRouter } from "next/router";
 import { deleteUser } from "../../client/store/delete/slice";
 import styles from "../../client/styles/Settings.module.scss";
 import {userDetails} from "../../client/store/user-details/slice"
-
+import Head from "next/head";
 const UserProfile = () => {
- 
-  const userDetailsState = useAppSelector(
-    (state: RootState) => state.userDetailsState
-  );
-
-
-  const [edit, setEdit] = useState(false);
-  const dispatch = useAppDispatch();
-  const router = useRouter();
- 
-  console.log(router);
-  const [deleteshow, setDeleteshow] = useState(false);
-  const [User, setUser] = useState<IUserDetail>({
+ const userDetailsState = useAppSelector((state: RootState) => state.userDetailsState);
+ const [edit, setEdit] = useState(false);
+ const dispatch = useAppDispatch();
+ const router = useRouter();
+ const [deleteshow, setDeleteshow] = useState(false);
+ const [User, setUser] = useState<IUserDetail>({
     firstName: "",
     lastName: "",
     userName: "",
@@ -33,25 +26,20 @@ const UserProfile = () => {
     firstName: "",
     lastName: "",
   });
-
   useEffect(() => {
-    console.log(router.query);
-    if (router.query.userName ) {
+    if (router.query.userName ){
+     const userName: string =  router.query.userName.toString();
      dispatch(
         userDetails(
-        router.query.userName
+       userName
         )
       );
-   
-    
-      }
-  }, [router.query.userName]);
+   }
+  }, [dispatch, router.query, router.query.userName]);
   useEffect(() => {
-   
-    if (userDetailsState.data) setUser({ ...userDetailsState.data });
+   if (userDetailsState.data) setUser({ ...userDetailsState.data });
   }, [userDetailsState.data]);
-  console.log(User, "hii", User.userName);
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+ const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {
       case "firstName":
@@ -63,8 +51,7 @@ const UserProfile = () => {
             : "Name should contains only Alphabets .",
         });
         break;
-
-      default:
+        default:
         break;
     }
     setUser({ ...User, [name]: value });
@@ -89,6 +76,11 @@ const UserProfile = () => {
   };
   return (
     <>
+       <Head>
+        <title>Profile page</title>
+        <meta  name="description"
+              content=" Profile Page with CRUD operations of Next.ts Template application" />
+      </Head>
       <div className={styles.backgroundblue}>
         <div>
           <div className={styles.dropdownitem}>

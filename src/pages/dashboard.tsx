@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Row, Col, Container } from "react-bootstrap";
-import { useSession, signIn, signOut } from "next-auth/react"
+import Head from "next/head";
 export default function Dashboard({ posts }: { posts: any }) {
  
   
  
   return (
     <>
+     <Head>
+        <title>Dashboard page</title>
+        <meta  name="description"
+              content=" Dashboard with ServerSide Rendering and Image Optimization of Next.ts Template application" />
+      </Head>
       <Container className="p-3">
         <Row>
           {posts.map((post: any) => {

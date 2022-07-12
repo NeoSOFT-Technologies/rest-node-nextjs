@@ -19,10 +19,9 @@ const userController = {
   },
   updateUser: async (req: NextApiRequest, res: NextApiResponse) => {
     const userName = req.query.userName as string
-    // console.log(userName, "1");
-    console.log(req.body, "this is body");
+   
     const { firstName, lastName, }: { firstName: string; lastName: string; } = req.body;
-    console.log(userName, firstName, lastName, "3");
+  
     if (!userName || !firstName || !lastName) { throw new Error("data ia not updated"); }
     const user = await userService.updateUser({ userName, firstName, lastName });
     res.status(200).json( user );

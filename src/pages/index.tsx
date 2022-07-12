@@ -7,10 +7,10 @@ import { useAppDispatch } from "../client/store/hooks";
 import { getUserDetails } from "../client/store/login/slice";
 import { ToastAlert } from "../client/components/toast-alert/toast-alert";
 import styles from "../client/styles/Login.module.scss";
-import RootState from "../client/store";
 import { useTranslation } from "react-i18next";
 import LanguageChange from "../client/components/i18n/LanguageChange";
 import { ILoginData, LoginPageState } from "../client/types";
+import Head from 'next/head'
 export default function Login() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({ userName: "", password: "" });
@@ -61,6 +61,13 @@ export default function Login() {
 
   return (
     <>
+    <Head>
+    <title>Next.ts Full-stack Template</title>
+     
+      
+        <meta name="description" content="A Next.ts Full-stackTemplate" />
+    
+      </Head>
       <div className={styles.backgroundblue}>
         <div className={styles.center}>
           <Form className={styles.backgroudoffwhite}>
@@ -136,10 +143,4 @@ Login.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>;
 };
 
-export async function getServerSideProps(context: any) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  };
-}
+

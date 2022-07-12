@@ -15,6 +15,7 @@ import { IErrorUserInput, IRegisterDatas } from "../client/types/index";
 import styles from "../client/styles/Register.module.scss";
 import { useTranslation } from "react-i18next";
 import LanguageChange from "../client/components/i18n/LanguageChange";
+import Head from "next/head";
 export default function Registration() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -57,23 +58,22 @@ export default function Registration() {
         });
         break;
 
-      case "password":
-        setError({
-          ...error,
-          [name]: regForPassword.test(value)
-            ? ""
-            : "Password should contains minimum one Number,uppercase,lowercase,special Character (8-15).",
-        });
-        break;
-      case "cnfpassword":
-        setError({
-          ...error,
-          [name]:
-            (user.cnfpassword = value) !== user.password
-              ? "ConfirmPassword show match with Password"
-              : "",
-        });
-        break;
+        case "password":
+          setError({
+            ...error,
+            [name]: regForPassword.test(value)
+              ? ""
+              : "Password should contains minimum one Number,uppercase,lowercase,special Character (8-15).",
+          });
+          if (user.cnfpassword) {
+            setError({
+              ...error,
+              cnfpassword: (user.cnfpassword != value)
+                ? "Confirm Password show match with Password"
+                : ""
+            });
+          }
+          break;
     }
     setUser({ ...user, [name]: value });
   };
@@ -110,6 +110,11 @@ export default function Registration() {
 
   return (
     <>
+    <Head>
+        <title>Register page</title>
+        <meta  name="description"
+              content="Register page of Next.ts Template application" />
+      </Head>
       <div className={styles.backgroundblue}>
         <div className={styles.center}>
           <Form
@@ -203,8 +208,8 @@ export default function Registration() {
                     </InputGroup.Text>
                   </InputGroup>
                   <Form.Control.Feedback type="invalid" className="d-block">
-                    {t("password-error")}
-                  </Form.Control.Feedback>
+                  {error.password && t("password-error")}
+                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col md="6">
@@ -230,7 +235,7 @@ export default function Registration() {
                     </InputGroup.Text>
                   </InputGroup>
                   <Form.Control.Feedback type="invalid" className="d-block">
-                    {t("cnfpassword-error")}
+                  {error.cnfpassword && t("cnfpassword-error")}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>

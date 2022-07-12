@@ -5,7 +5,7 @@ import Authguard from "../client/components/auth-guard/AuthGuard";
 import store from "../client/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ErrorBoundary from "../client/components/error-boundary/ErrorBoundary";
-import Header from "./header";
+import Header from "../client/components/header/Header";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import { SessionProvider } from "next-auth/react";
@@ -26,9 +26,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <SessionProvider session={pageProps.session}  >
         <Provider store={store}>
           <ErrorBoundary>
-            {/* <Authguard> */}
+            <Authguard>
               <Component {...pageProps} />
-            {/* </Authguard> */}
+            </Authguard>
           </ErrorBoundary>
         </Provider>
       </SessionProvider>
@@ -41,9 +41,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <Provider store={store}>
           <ErrorBoundary>
           <Header />
-            {/* <Authguard> */}
+            <Authguard>
               <Component {...pageProps} />
-            {/* </Authguard> */}
+            </Authguard>
           </ErrorBoundary>
         </Provider>
       </SessionProvider>
