@@ -5,11 +5,10 @@ import Authguard from "../client/components/auth-guard/AuthGuard";
 import store from "../client/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ErrorBoundary from "../client/components/error-boundary/ErrorBoundary";
-import Header from "../client/components/header/Header";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import { SessionProvider } from "next-auth/react";
-
+//import Header from "../client/components/header/Header";
 import "../client/i18n/config";
 
 export type NextPageWithLayout = NextPage & {
@@ -40,7 +39,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <SessionProvider session={pageProps.session} >
         <Provider store={store}>
           <ErrorBoundary>
-          <Header />
+          {/* <Header /> */}
             <Authguard>
               <Component {...pageProps} />
             </Authguard>
