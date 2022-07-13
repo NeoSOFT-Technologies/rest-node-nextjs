@@ -1,28 +1,33 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import { useSession } from "next-auth/react"
 function Authguard({ children }: { children: any }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
   const userData = useSelector((root: any) => root.login);
-
-  function authCheck(url: string) {
-    // redirect to login page if accessing a private page and not logged in
-    const publicPaths = ["/profile"];
-    const path = url.split("?")[0];
-    if (!userData.data && publicPaths.includes(path)) {
-      setAuthorized(false);
-      router.push({
-        pathname: "/login",
-        query: { returnUrl: url },
-      });
-    } else {
-      setAuthorized(true);
-    }
-  }
+  const { status} = useSession()
+  
 
   useEffect(() => {
+
+    function authCheck(url: string) {
+      // redirect to login page if accessing a private page and not logged in
+      const publicPaths = ["/","/register"];
+      const path = url.split("?")[0];
+    
+      if (!userData.data && status == "unauthenticated" && !publicPaths.includes(path)) {
+        setAuthorized(false);
+    console.log(authorized,"if")
+        router.push({
+          pathname: "/",
+          query: { returnUrl: url },
+        });
+      } else {
+        setAuthorized(true);
+        console.log(authorized,"else")
+      }
+    }
     authCheck(router.asPath);
     const hideContent = () => setAuthorized(false);
     router.events.on("routeChangeStart", hideContent);
@@ -32,7 +37,7 @@ function Authguard({ children }: { children: any }) {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-  }, [userData]);
+  }, [authorized, router, router.asPath, router.events, status, userData.data]);
 
   return authorized && children;
 }

@@ -1,0 +1,21 @@
+{
+ 
+  "sign-in-clause": "Login Page",
+  "sign-up-clause": "Registration Page",
+  "firstname-placeholder": "Enter FirstName",
+  "lastname-placeholder": "Enter LastName",
+  "username-placeholder": "Enter Username",
+  "password-placeholder": "Enter Password",
+  "cnfpassword-placeholder": "Enter ConfirmPassword",
+
+  "sign-in-button": "Login",
+  "sign-up-button": "Register",
+  "name-error":"Name should contains only Alphabets",
+  "username-error":"Name should only consist AlphaNumeric characters.",
+  "password-error":"Password should contains minimum one Number,uppercase,lowercase,special Character (8-15).",
+  "cnfpassword-error":"ConfirmPassword show match with Password"
+  
+  
+
+  
+}

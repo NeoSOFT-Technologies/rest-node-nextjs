@@ -1,12 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { validateUserLoginCredentials } from "../../services/login";
-import { LoginPageState } from "../../types/index";
-import errorHandler from "../../utils/error-handler";
 
-interface ILoginDataConditions {
-  userName: string;
-  password: string;
-}
+import { LoginPageState } from "../../types/index";
+
+
+
 const initialState: LoginPageState = {
   data: undefined,
   loading: false,
@@ -15,15 +12,13 @@ const initialState: LoginPageState = {
 
 export const getUserDetails = createAsyncThunk(
   "login/user",
-  async (credentials: ILoginDataConditions) => {
-    try {
-      const response = await validateUserLoginCredentials(credentials);
-      console.log(response);
-      return response;
-    } catch (_error: any) {
-      const errorMessage = errorHandler(_error);
-      throw new Error(errorMessage);
+  async (data: LoginPageState) => {
+ 
+    if (data.error) {
+      throw new Error(data.error);
     }
+    console.log(data.data)
+    return data.data;
   }
 );
 
@@ -31,12 +26,8 @@ const slice = createSlice({
   name: "user-login",
   initialState,
   reducers: {
-    resetUserLogin: (state) => {
-      state.loading = false;
-      state.data = undefined;
-      state.error = undefined;
-      localStorage.clear();
-    },
+
+
   },
   extraReducers(builder): void {
     builder.addCase(getUserDetails.pending, (state) => {
@@ -46,7 +37,7 @@ const slice = createSlice({
     });
     builder.addCase(getUserDetails.fulfilled, (state, action) => {
       state.loading = false;
-      localStorage.setItem("userName", JSON.stringify(action.payload.userName));
+      
       state.data = action.payload;
     });
     builder.addCase(getUserDetails.rejected, (state, action) => {
@@ -55,5 +46,5 @@ const slice = createSlice({
     });
   },
 });
-export const { resetUserLogin } = slice.actions;
+
 export default slice.reducer;

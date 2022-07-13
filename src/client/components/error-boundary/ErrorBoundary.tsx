@@ -21,6 +21,7 @@ class ErrorBoundary extends React.Component<any, { hasError: boolean }> {
           <h2>Oops, there is an error!</h2>
           <button
             type="button"
+            data-testid="tryagain-btn"
             onClick={() => this.setState({ hasError: false })}
           >
             Try again?

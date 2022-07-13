@@ -1,0 +1,17 @@
+{
+  "sign-in-clause": "लोग इन वाला पन्ना",
+  "sign-up-clause": "पंजीकरण पृष्ठ",
+  "firstname-placeholder": "प्रथम नाम दर्ज करें",
+  "lastname-placeholder": "अंतिम नाम दर्ज करो",
+  "username-placeholder": "उपयोगकर्ता नाम दर्ज करें",
+  "password-placeholder": "पास वर्ड दर्ज करें",
+  "cnfpassword-placeholder": "कन्फर्म पासवर्ड दर्ज करें",
+  "sign-in-button": "लॉग इन करें",
+  "sign-up-button": "पंजीकरण करवाना",
+  "name-error":"नाम में केवल अक्षर होने चाहिए",
+  "username-error":"नाम में केवल अल्फ़ान्यूमेरिक वर्ण होने चाहिए.",
+  "password-error":"पासवर्ड में कम से कम एक नंबर, अपरकेस, लोअरकेस, स्पेशल कैरेक्टर (8-15) होना चाहिए।",
+  "cnfpassword-error":"कन्फर्मपासवर्ड शो पासवर्ड के साथ मेल खाता है"
+  
+
+  }

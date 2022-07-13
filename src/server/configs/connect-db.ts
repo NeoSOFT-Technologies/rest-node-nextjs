@@ -1,34 +1,22 @@
 import { DataSource } from "typeorm";
-import { User } from "../entities/user";
+import dbconfig from "./db.config";
 
-let myDataSource: DataSource;
+let dataSource: DataSource;
 
 async function connectDb() {
   console.log("connecting to database");
-  if (!myDataSource) {
+  if (!dataSource) {
     console.log("connection is going to established");
-    myDataSource = new DataSource({
-      type: "mongodb",
-      // url: "mongodb://mongodb:27017",
-      // url: "mongodb://localhost:27017",
-      host: process.env.DB_HOST,
-      port: 27017,
-      database: "nextjs-datebase",
-      useNewUrlParser: true,
-      logging: true,
-      synchronize: true,
-      entities: [User],
-    });
-
+    dataSource = dbconfig;
     try {
-      await myDataSource.initialize();
+      await dataSource.initialize();
     } catch (error) {
       console.log(error);
     }
     console.log("connection established");
   }
-  console.log(myDataSource.isInitialized);
-  return myDataSource;
+  console.log(dataSource.isInitialized);
+  return dataSource;
 }
 
 export default connectDb;
