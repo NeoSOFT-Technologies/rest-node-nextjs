@@ -107,12 +107,12 @@ export default function plopfile(plop) {
         actions: [
             {
                 type: "add",
-                path: "src/components/{{dashCase name}}/{{capitalize name}}.tsx",
+                path: "src/client/components/{{dashCase name}}/{{capitalize name}}.tsx",
                 templateFile: "./plop-templates/component.hbs",
             },
             {
                 type: "add",
-                path: "src/components/{{dashCase name}}/{{capitalize name}}.test.tsx",
+                path: "src/client/components/{{dashCase name}}/{{capitalize name}}.test.tsx",
             },
         ],
     });

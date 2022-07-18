@@ -4,12 +4,12 @@ import { User } from "../entities/user";
 const dataSource = connectDb();
 
 const userService = {
-  getAllUser: async () => {
-    const userRepo =  (await dataSource).getMongoRepository(User)
+  // getAllUser: async () => {
+  //   const userRepo =  (await dataSource).getMongoRepository(User)
     
-    return userRepo.find();
+  //   return userRepo.find();
   
-  },
+  // },
   getUser: async ({ userName }: { userName: string; }) => {
     const userRepo =  (await dataSource).getMongoRepository(User)
    return userRepo.findOne({ where: { userName } });

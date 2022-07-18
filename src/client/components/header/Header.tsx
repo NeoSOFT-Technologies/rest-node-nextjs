@@ -5,9 +5,7 @@ import { useSelector } from "react-redux";
 export default function Header() {
   const router = useRouter();
   const userData = useSelector((root: any) => root.login);
-  // console.log(userData)
-  // console.log(userData.data)
-  // console.log(userData.data.userName)
+ 
   return (
     <div>
       <Navbar bg="primary" variant="dark">

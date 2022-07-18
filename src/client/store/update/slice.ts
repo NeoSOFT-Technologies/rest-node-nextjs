@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { updateUserDataService } from "../../services/login";
+import { updateUserDataService } from "../../services";
 import { IUserDetail } from "../../types/index";
 import errorHandler from "../../utils/error-handler";
 

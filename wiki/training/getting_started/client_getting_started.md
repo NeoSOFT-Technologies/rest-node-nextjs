@@ -1,18 +1,18 @@
 # How To Guide
-For getting started with the react-boilerplate you need to follow the following steps :
+For getting started with the NextJS-boilerplate you need to follow the following steps :
 
 `Step 1` :  Cloning the repository
 ```
 git clone https://github.com/NeoSOFT-Technologies/rest-node-nextjs
 ```
-after the successful run of thē command you will have folder name `frontend-reactjs`
+after the successful run of thē command you will have folder name `rest-node-nextjs`
 
-`Step 2` :  Installation of the all packages, dependences and dev-dependences. Go inside the `frontend-reactjs` folder and run :
+`Step 2` :  Installation of the all packages, dependences and dev-dependences. Go inside the `rest-node-nextjs` folder and run :
 ```
 npm install
 ```
 
-after the successful run of thē command you will have folder name `node_modules` inside `frontend-reactjs` folder 
+after the successful run of thē command you will have folder name `node_modules` inside `rest-node-nextjs` folder 
 
 Note : if the above command gives you the error you can force the installation by using  `npm install -f`
 
@@ -24,7 +24,9 @@ after the successful run of thē command you will find an output on the browser 
 
 `Step 4` : Now you can add pages and components to your project. For adding pages and components you need to understand the file structure for that you can refer to `README.md` file.
 
-### For adding a component go to `frontend-reactjs/src/components/` and add
+`Step 5`: we have implemented plop ,if you run `npm run generate` it will show you the options where to create the file/folder, based on that it will generate.
+
+### For adding a component go to `rest-node-nextjs/src/client/components/` and add
 ```
 📂 mycomponent
  |- 📝 MyComponent.tsx
@@ -38,16 +40,19 @@ This file will contain the test case for the Component for writing testcase refe
 ## 📝 MyComponent.tsx
 This file will contain the main code and the functionality for the component.
 
-### For adding a page you have to ensure at which level you want to add the page we have folder segregation as follows :
-Location : `frontend-reactjs/src/pages/features/`
+### For adding in pages, NextJs consider each file as a individual routes,so create only necessary route files
+Location : ``rest-node-nextjs/src/pages/`
 ```
-📂 pages
- |- 📁 login
- |- 📁 registration
- |- 📁 landing
 
-```
-For Further explaination we procced with an example by adding a `DemoPage` inside `frontend-reactjs/src/pages/` 
+📂 src
+  └──📂 pages
+      |   └── 📝 _app.tsx
+      |   └── 📝 index.tsx
+      |   └── 📝 register.tsx
+      ├──📂 settings
+      |   └── [userName].tsx
+ ```
+For Further explaination we procced with an example by adding a `DemoPage` inside ``rest-node-nextjs/src/pages/` 
 
 `Step 5` : Adding the folder for the page with three files in it as below
 

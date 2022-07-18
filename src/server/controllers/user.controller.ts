@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import userService from "../services/user.service";
 const userController = {
-  getAllUser: async (_req: NextApiRequest, res: NextApiResponse) => {
-    const user = await userService.getAllUser();
-    res.status(200).json(user );
-  },
+  // getAllUser: async (_req: NextApiRequest, res: NextApiResponse) => {
+  //   const user = await userService.getAllUser();
+  //   res.status(200).json(user );
+  // },
   getUser: async (req: NextApiRequest, res: NextApiResponse) => {
     const userName = req.query.userName as string
     if (!userName) { throw new Error("please provide userName "); }
